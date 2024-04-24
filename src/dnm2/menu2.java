@@ -323,16 +323,11 @@ public class menu2 extends JFrame {
         lblStockCard.setFont(new Font("Tahoma", Font.BOLD, 20));
         lblStockCard.setBounds(10, 6, 149, 40);
         panelsc.add(lblStockCard);
-        
-        JButton btnNewButton = new JButton("a");
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnNewButton.setBounds(74, 87, 85, 40);
-        panelsc.add(btnNewButton);
     
         menuframe.setVisible(true);
 
 	}
-	
+
 
     //METHOD---------------------------------------------------------------------------------------------------------------------
 	
