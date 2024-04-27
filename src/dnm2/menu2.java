@@ -1,4 +1,6 @@
 package dnm2;
+import database.MySQLDeneme;
+
 
 import java.awt.EventQueue;
 import java.util.ArrayList;
@@ -10,11 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -22,8 +19,6 @@ import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
-import javax.swing.border.EtchedBorder;
-import java.awt.Color;
 
 
 public class menu2 extends JFrame {
@@ -154,6 +149,8 @@ public class menu2 extends JFrame {
                 DefaultTableModel model= (DefaultTableModel)table_1.getModel();
                 model.addRow(new Object[] {txtbarcode.getText(),txtbname.getText(),txtedition.getText(),Double.parseDouble(txtprice.getText())});
                 }
+
+                MySQLDeneme.addBook(Integer.parseInt(barcode), bookName, Integer.parseInt(edition), price);
                 
         	}
         });
@@ -253,7 +250,10 @@ public class menu2 extends JFrame {
                 } 
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
-                }	
+                }
+
+
+
             }
         });
         
