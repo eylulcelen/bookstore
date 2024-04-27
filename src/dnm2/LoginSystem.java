@@ -3,9 +3,6 @@ package dnm2;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.JFrame;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 public class LoginSystem {
 	

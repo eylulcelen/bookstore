@@ -86,13 +86,12 @@ public class frame1 extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(e.getButton()==MouseEvent.BUTTON1)
-					
-					
-					
-				if (txtUsername.getText().equals("admin")&&passwordField.getText().equals("1"))
-				lbl.setText("Login successful!");
-				else
-				lbl.setText("Username or password is wrong!\n");
+
+					if (txtUsername.getText().equals("admin")&&passwordField.getText().equals("1"))
+						lbl.setText("Login successful!");
+					else
+						lbl.setText("Username or password is wrong!\n");
+
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 15));
