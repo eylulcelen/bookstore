@@ -46,10 +46,30 @@ public class MySQLDeneme {
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
             statement.executeUpdate(update);
+
+            connection.close();
         }
         catch(Exception e) {System.out.println(e);}
     }
 
+    public static void deleteBook(String barcode) {
+        String url = "jdbc:mysql://localhost:3306/java_sql";
+        String username = "root";
+        String password = "frkn3756";
 
+        String delete = "DELETE FROM books WHERE barcode = " + barcode + ";";
 
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(delete);
+
+            connection.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+    }
 }

@@ -281,6 +281,8 @@ public class menu2 extends JFrame {
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
                 }
+
+                MySQLDeneme.deleteBook(barcode);
             }
         });
         
