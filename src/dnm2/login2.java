@@ -1,5 +1,7 @@
 package dnm2;
 
+import database.MySQLDeneme;
+
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -86,6 +88,7 @@ public class login2 extends JFrame {
 
         frame.setVisible(true);
     }
+
 
     private boolean login(String username, String password) {
         for (Users user:users) {

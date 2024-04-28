@@ -3,6 +3,10 @@ import database.MySQLDeneme;
 
 
 import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -38,7 +42,8 @@ public class menu2 extends JFrame {
 	private JTable table_1;
 
 
-	/**
+
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -55,7 +60,9 @@ public class menu2 extends JFrame {
 	 */
 	
 	public menu2() {
-		
+
+
+
 		JFrame menuframe = new JFrame();
 		menuframe.setTitle("Book Management System");
         menuframe.setBounds(100, 100, 560, 400);
@@ -126,7 +133,13 @@ public class menu2 extends JFrame {
         panelinfo.add(txtedition);
         txtedition.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtedition.setColumns(10);
-        
+
+
+
+
+
+
+
         JButton btnsave = new JButton("Save");
         btnsave.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -154,7 +167,8 @@ public class menu2 extends JFrame {
                 
         	}
         });
-        
+
+
         
         btnsave.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnsave.setBounds(20, 208, 85, 37);
@@ -313,6 +327,10 @@ public class menu2 extends JFrame {
         	}
         });
         scrollPane.setViewportView(table_1);
+
+        model = new DefaultTableModel();
+        DefaultTableModel model= (DefaultTableModel)table_1.getModel();
+        MySQLDeneme.loadBooks(model);
         
         
         //STOCKCARD--------------------------------------------------------------------------------------------------------------
