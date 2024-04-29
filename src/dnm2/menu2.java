@@ -1,5 +1,7 @@
 package dnm2;
 
+import database.MySQLDeneme;
+
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,21 +41,27 @@ public class menu2 extends JFrame {
 	private static ArrayList<String> usedBarcodes = new ArrayList<>();
 	
 
-	private JTextField txtbname;
-	private JTextField txtedition;
-	private JTextField txtprice;
+	private static JTextField txtbname;
+	private static JTextField txtedition;
+	private static JTextField txtprice;
 	private JTextField txtsbarcode;
 	private JTextArea textArea;
 	private DefaultTableModel model;
 	private JTable table;
-	private JTextField txtbarcode;
+	private static JTextField txtbarcode;
 	private JTable table_1;
 	private JRadioButton rdbtnhorror;
 	private JRadioButton rdbtnromance;
 	private JRadioButton rdbtnmystery;
 	private JRadioButton rdbtnpoetry;
 
+    public static JTextField getTxtbname() {return txtbname;}
 
+    public static JTextField getTxtedition() {return txtedition;}
+
+    public static JTextField getTxtprice() {return txtprice;}
+
+    public static JTextField getTxtbarcode() {return txtbarcode;}
 
     /**
 	 * Launch the application.
@@ -285,11 +293,16 @@ public class menu2 extends JFrame {
                     } else if (genre.equals("Poetry")) {
                         rdbtnpoetry.setSelected(true);
                     }
+
+                    MySQLDeneme.searchBook(barcode);
                     
                 } 
                 else{
-                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    MySQLDeneme.searchBook(barcode);
                 }
+
+                MySQLDeneme.searchBook(barcode);
             	
             }
         });
@@ -336,11 +349,16 @@ public class menu2 extends JFrame {
                     updateBookInTable(foundBook);
                     
                     JOptionPane.showMessageDialog(menuframe, "Book updated successfully.");
-                } 
+
+
+                }
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
-                }	
+
+                }
             }
+
+
         });
         
         

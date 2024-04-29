@@ -9,9 +9,6 @@ public class MySQLDeneme {
 
 
     public static void main(String[] args) {
-        addBook(7, "The Shadow Over Innsmouth", 8, 354.00);
-
-        printAllBooks();
 
     }
 
@@ -26,7 +23,6 @@ public class MySQLDeneme {
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM books");
-
 
             while(resultset.next()) {
 
@@ -101,4 +97,37 @@ public class MySQLDeneme {
         }
 
     }
+
+
+    public static void searchBook(String barcode) {
+        String url = "jdbc:mysql://localhost:3306/java_sql";
+        String username = "root";
+        String password = "frkn3756";
+
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM books WHERE Barcode = " + barcode + ";");
+
+            if (!resultSet.next()) {
+                return;
+            }
+            resultSet.first();
+
+            menu2.getTxtbarcode().setText(resultSet.getString(1));
+            menu2.getTxtbname().setText(resultSet.getString(2));
+            menu2.getTxtedition().setText(resultSet.getString(3));
+            menu2.getTxtprice().setText(resultSet.getString(4));
+
+            connection.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 }
