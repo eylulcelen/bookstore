@@ -1,6 +1,10 @@
 package dnm2;
 
 import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -50,7 +54,8 @@ public class menu2 extends JFrame {
 	private JRadioButton rdbtnpoetry;
 
 
-	/**
+
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -67,7 +72,9 @@ public class menu2 extends JFrame {
 	 */
 	
 	public menu2() {
-		
+
+
+
 		JFrame menuframe = new JFrame();
 		menuframe.setTitle("Book Management System");
         menuframe.setBounds(100, 100, 760, 500);
@@ -138,6 +145,7 @@ public class menu2 extends JFrame {
         panelinfo.add(txtedition);
         txtedition.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtedition.setColumns(10);
+
         
         JLabel lblgenre = new JLabel("Genre:");
         lblgenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -171,6 +179,7 @@ public class menu2 extends JFrame {
         genreGroup.add(rdbtnpoetry);
         
         
+
         JButton btnsave = new JButton("Save");
         btnsave.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -206,7 +215,8 @@ public class menu2 extends JFrame {
                 
         	}
         });
-        
+
+
         
         btnsave.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnsave.setBounds(30, 309, 85, 37);
@@ -357,6 +367,8 @@ public class menu2 extends JFrame {
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
                 }
+
+                MySQLDeneme.deleteBook(barcode);
             }
         });
         
@@ -382,6 +394,10 @@ public class menu2 extends JFrame {
         	}
         });
         scrollPane.setViewportView(table_1);
+
+        model = new DefaultTableModel();
+        DefaultTableModel model= (DefaultTableModel)table_1.getModel();
+        MySQLDeneme.loadBooks(model);
         
         
         //STOCKCARD--------------------------------------------------------------------------------------------------------------
