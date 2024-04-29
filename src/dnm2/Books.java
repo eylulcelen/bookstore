@@ -1,24 +1,32 @@
 package dnm2;
 
-
-
 public class Books {
 	
 	private String name;
 	private String edition;
 	private double price;
 	private String barcode;
+	private String genre;
 	
 	
 	
-    public Books(String barcode, String name, String edition, double price) {
+    public Books(String barcode, String name, String edition, double price, String genre) {
         
         this.barcode = barcode;
         this.name = name;
         this.edition = edition;
         this.price = price;
+        this.genre = genre;
     }
     
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
 	public String getBarcode() {
 		return barcode;
 	}
