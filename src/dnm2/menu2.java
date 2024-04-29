@@ -55,21 +55,13 @@ public class menu2 extends JFrame {
 	private JRadioButton rdbtnmystery;
 	private JRadioButton rdbtnpoetry;
 
-    public static JTextField getTxtbname() {
-        return txtbname;
-    }
+    public static JTextField getTxtbname() {return txtbname;}
 
-    public static JTextField getTxtedition() {
-        return txtedition;
-    }
+    public static JTextField getTxtedition() {return txtedition;}
 
-    public static JTextField getTxtprice() {
-        return txtprice;
-    }
+    public static JTextField getTxtprice() {return txtprice;}
 
-    public static JTextField getTxtbarcode() {
-        return txtbarcode;
-    }
+    public static JTextField getTxtbarcode() {return txtbarcode;}
 
     /**
 	 * Launch the application.
@@ -301,10 +293,13 @@ public class menu2 extends JFrame {
                     } else if (genre.equals("Poetry")) {
                         rdbtnpoetry.setSelected(true);
                     }
+
+                    MySQLDeneme.searchBook(barcode);
                     
                 } 
                 else{
-                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    MySQLDeneme.searchBook(barcode);
                 }
 
                 MySQLDeneme.searchBook(barcode);

@@ -10,7 +10,6 @@ public class MySQLDeneme {
 
     public static void main(String[] args) {
 
-
     }
 
     public static void loadBooks(DefaultTableModel model) {
@@ -24,7 +23,6 @@ public class MySQLDeneme {
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM books");
-
 
             while(resultset.next()) {
 
@@ -114,6 +112,10 @@ public class MySQLDeneme {
             Connection connection = DriverManager.getConnection(url, username, password);
             Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             ResultSet resultSet = statement.executeQuery("SELECT * FROM books WHERE Barcode = " + barcode + ";");
+
+            if (!resultSet.next()) {
+                return;
+            }
             resultSet.first();
 
             menu2.getTxtbarcode().setText(resultSet.getString(1));
