@@ -215,6 +215,8 @@ public class menu2 extends JFrame {
                 Books book = new Books(barcode, bookName, edition, price, genre);
                 books.add(book);
                 JOptionPane.showMessageDialog(null, "Book saved successfully.");
+
+                MySQLDeneme.addBook(Integer.parseInt(barcode), bookName, Integer.parseInt(edition), price);
                 
                 model = new DefaultTableModel();
                 DefaultTableModel model= (DefaultTableModel)table_1.getModel();
@@ -294,12 +296,10 @@ public class menu2 extends JFrame {
                         rdbtnpoetry.setSelected(true);
                     }
 
-                    MySQLDeneme.searchBook(barcode);
-                    
+
                 } 
                 else{
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
-                    MySQLDeneme.searchBook(barcode);
                 }
 
                 MySQLDeneme.searchBook(barcode);

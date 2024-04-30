@@ -3,13 +3,11 @@ package database;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import dnm2.menu2;
-import javax.swing.JTable;
 
 public class MySQLDeneme {
 
 
     public static void main(String[] args) {
-
     }
 
     public static void loadBooks(DefaultTableModel model) {
@@ -50,7 +48,7 @@ public class MySQLDeneme {
             ResultSet resultset = statement.executeQuery("SELECT * FROM books");
 
             while(resultset.next()) {
-                System.out.println(resultset.getInt(1) + " " + resultset.getString(2) + " " + resultset.getInt(3) + " " + resultset.getInt(4));
+                System.out.println(STR."\{resultset.getInt(1)} \{resultset.getString(2)} \{resultset.getInt(3)} \{resultset.getInt(4)}");
             }
             connection.close();
         }
@@ -62,15 +60,18 @@ public class MySQLDeneme {
         String username = "root";
         String password = "frkn3756";
 
-        String update = "INSERT INTO books (Barcode, Book_name, Edition, Price) " +
-                "VALUES (" + barcode + ", '" + bookName + "', " + edition + ", " + price + ");";
+        String update = "INSERT INTO books VALUES (?, ?, ?, ?);";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(update);
+            PreparedStatement statement = connection.prepareStatement(update);
+            statement.setInt(1, barcode);
+            statement.setString(2, bookName);
+            statement.setInt(3, edition);
+            statement.setDouble(4, price);
+            statement.executeUpdate();
 
             connection.close();
         }
@@ -82,14 +83,15 @@ public class MySQLDeneme {
         String username = "root";
         String password = "frkn3756";
 
-        String delete = "DELETE FROM books WHERE barcode = " + barcode + ";";
+        String delete = "DELETE FROM books WHERE barcode = ?;";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(delete);
+            PreparedStatement statement = connection.prepareStatement(delete);
+            statement.setString(1,barcode);
+            statement.executeUpdate();
 
             connection.close();
         } catch (Exception e) {
@@ -104,14 +106,15 @@ public class MySQLDeneme {
         String username = "root";
         String password = "frkn3756";
 
-
+        String search = "SELECT * FROM books WHERE Barcode = ?;";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM books WHERE Barcode = " + barcode + ";");
+            PreparedStatement statement = connection.prepareStatement(search,ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1, barcode);
+            ResultSet resultSet = statement.executeQuery();
 
             if (!resultSet.next()) {
                 return;
