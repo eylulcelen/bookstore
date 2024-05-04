@@ -1,12 +1,6 @@
 package dnm2;
 
-import database.MySQLDeneme;
-
 import java.awt.EventQueue;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -46,7 +40,7 @@ public class menu2 extends JFrame {
 	private static ArrayList<Books> books = new ArrayList<>();
 	private static ArrayList<String> usedBarcodes = new ArrayList<>();
 	private Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
-	
+
 	private JTextField txtbname;
 	private JTextField txtedition;
 	private JTextField txtprice;
@@ -54,7 +48,7 @@ public class menu2 extends JFrame {
 	private JTextArea textArea;
 	private DefaultTableModel model;
 	private JTable table;
-	private static JTextField txtbarcode;
+	private JTextField txtbarcode;
 	private JTable table_1;
 	private JRadioButton rdbtnhorror;
 	private JRadioButton rdbtnromance;
@@ -63,20 +57,9 @@ public class menu2 extends JFrame {
 	private JTextField txtBarcode;
 	private JTextField txtQuantity;
 	private JTable table_2;
-	private JRadioButton rdbtnhorror;
-	private JRadioButton rdbtnromance;
-	private JRadioButton rdbtnmystery;
-	private JRadioButton rdbtnpoetry;
 
-    public static JTextField getTxtbname() {return txtbname;}
 
-    public static JTextField getTxtedition() {return txtedition;}
-
-    public static JTextField getTxtprice() {return txtprice;}
-
-    public static JTextField getTxtbarcode() {return txtbarcode;}
-
-    /**
+	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -93,18 +76,14 @@ public class menu2 extends JFrame {
 	 */
 	
 	public menu2() {
-
-
-
+		
 		JFrame menuframe = new JFrame();
 		menuframe.setTitle("Book Management System");
-        menuframe.setBounds(100, 100, 760, 500);
         menuframe.setBounds(100, 100, 760, 500);
         menuframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuframe.getContentPane().setLayout(null);
         
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.setBounds(10, 10, 731, 458);
         tabbedPane.setBounds(10, 10, 731, 458);
         menuframe.getContentPane().add(tabbedPane);
         
@@ -122,7 +101,6 @@ public class menu2 extends JFrame {
         JPanel panelinfo = new JPanel();
         panelinfo.setBorder(new TitledBorder(null, "Registeration", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         panelinfo.setBounds(20, 56, 266, 243);
-        panelinfo.setBounds(20, 56, 266, 243);
         panelbc.add(panelinfo);
         panelinfo.setLayout(null);
         
@@ -133,7 +111,6 @@ public class menu2 extends JFrame {
         
         txtprice = new JTextField();
         txtprice.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtprice.setBounds(124, 112, 104, 21);
         txtprice.setBounds(124, 112, 104, 21);
         panelinfo.add(txtprice);
         txtprice.setColumns(10);
@@ -147,7 +124,6 @@ public class menu2 extends JFrame {
         txtbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtbarcode.setColumns(10);
         txtbarcode.setBounds(124, 21, 104, 21);
-        txtbarcode.setBounds(124, 21, 104, 21);
         panelinfo.add(txtbarcode);
         
         JLabel lblbname = new JLabel("Book Name:");
@@ -156,7 +132,6 @@ public class menu2 extends JFrame {
         lblbname.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
         txtbname = new JTextField();
-        txtbname.setBounds(124, 51, 104, 21);
         txtbname.setBounds(124, 51, 104, 21);
         panelinfo.add(txtbname);
         txtbname.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -168,7 +143,6 @@ public class menu2 extends JFrame {
         lbledition.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
         txtedition = new JTextField();
-        txtedition.setBounds(124, 81, 104, 21);
         txtedition.setBounds(124, 81, 104, 21);
         panelinfo.add(txtedition);
         txtedition.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -224,16 +198,6 @@ public class menu2 extends JFrame {
                 } else if (rdbtnpoetry.isSelected()) {
                     genre = "Poetry";
                 }
-                String genre = "";
-                if (rdbtnhorror.isSelected()) {
-                    genre = "Horror";
-                } else if (rdbtnromance.isSelected()) {
-                    genre = "Romance";
-                } else if (rdbtnmystery.isSelected()) {
-                    genre = "Mystery";
-                } else if (rdbtnpoetry.isSelected()) {
-                    genre = "Poetry";
-                }
                 
                 
                 if (!isBarcodeUnique(barcode)) {
@@ -241,25 +205,19 @@ public class menu2 extends JFrame {
                 }
                 else {
                 Books book = new Books(barcode, bookName, edition, price, genre);
-                Books book = new Books(barcode, bookName, edition, price, genre);
                 books.add(book);
                 JOptionPane.showMessageDialog(null, "Book saved successfully.");
-
-                MySQLDeneme.addBook(Integer.parseInt(barcode), bookName, Integer.parseInt(edition), price);
                 
                 model = new DefaultTableModel();
                 DefaultTableModel model= (DefaultTableModel)table_1.getModel();
-                model.addRow(new Object[]{barcode, bookName, edition, price, genre});
                 model.addRow(new Object[]{barcode, bookName, edition, price, genre});
                 }
                 
         	}
         });
-
-
+        
         
         btnsave.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnsave.setBounds(30, 309, 85, 37);
         btnsave.setBounds(30, 309, 85, 37);
         panelbc.add(btnsave);
         
@@ -272,19 +230,16 @@ public class menu2 extends JFrame {
         btnclear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                clear();
-               clear();
             }
         });
         
         
         btnclear.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnclear.setBounds(185, 309, 85, 39);
-        btnclear.setBounds(185, 309, 85, 39);
         panelbc.add(btnclear);
         
         JPanel searchpanel = new JPanel();
         searchpanel.setBorder(new TitledBorder(null, "Search", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        searchpanel.setBounds(384, 271, 266, 127);
         searchpanel.setBounds(384, 271, 266, 127);
         panelbc.add(searchpanel);
         searchpanel.setLayout(null);
@@ -292,13 +247,11 @@ public class menu2 extends JFrame {
         JLabel lblsbarcode = new JLabel("Book's barcode:");
         lblsbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblsbarcode.setBounds(10, 35, 130, 19);
-        lblsbarcode.setBounds(10, 35, 130, 19);
         searchpanel.add(lblsbarcode);
         
         txtsbarcode = new JTextField();
         txtsbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtsbarcode.setColumns(10);
-        txtsbarcode.setBounds(131, 34, 125, 21);
         txtsbarcode.setBounds(131, 34, 125, 21);
         searchpanel.add(txtsbarcode);
         
@@ -334,17 +287,14 @@ public class menu2 extends JFrame {
                     
                 } 
                 else{
-                    JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
                 }
-
-                MySQLDeneme.searchBook(barcode);
             	
             }
         });
     
 
         btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnSearch.setBounds(81, 77, 85, 40);
         btnSearch.setBounds(81, 77, 85, 40);
         searchpanel.add(btnSearch);
         
@@ -376,47 +326,24 @@ public class menu2 extends JFrame {
                     
                     //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
-
-                    
-                    String updatedGenre = "";
-                    if (rdbtnhorror.isSelected()) {
-                        updatedGenre = "Horror";
-                    } else if (rdbtnromance.isSelected()) {
-                        updatedGenre = "Romance";
-                    } else if (rdbtnmystery.isSelected()) {
-                        updatedGenre = "Mystery";
-                    } else if (rdbtnpoetry.isSelected()) {
-                        updatedGenre = "Poetry";
-                    }
-                    
-                    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
                     foundBook.setName(updatedName);
                     foundBook.setEdition(updatedEdition);
                     foundBook.setPrice(updatedPrice);
-                    foundBook.setGenre(updatedGenre);
-
                     foundBook.setGenre(updatedGenre);
 
                     
                     updateBookInTable1(foundBook);
                     
                     JOptionPane.showMessageDialog(menuframe, "Book updated successfully.");
-
-
-                }
+                } 
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
-
-                }
+                }	
             }
-
-
         });
         
         
         btnupdate.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnupdate.setBounds(355, 206, 85, 40);
         btnupdate.setBounds(355, 206, 85, 40);
         panelbc.add(btnupdate);
         
@@ -435,26 +362,21 @@ public class menu2 extends JFrame {
                     
                     JOptionPane.showMessageDialog(menuframe, "Book deleted successfully.");
                     clear();
-                    clear();
                 } 
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
                 }
-
-                MySQLDeneme.deleteBook(barcode);
             }
         });
         
         
         btndelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btndelete.setBounds(605, 206, 85, 40);
-        btndelete.setBounds(605, 206, 85, 40);
         panelbc.add(btndelete);
         
         
         
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(345, 17, 360, 181);
         scrollPane.setBounds(345, 17, 360, 181);
         panelbc.add(scrollPane);
         
@@ -464,19 +386,11 @@ public class menu2 extends JFrame {
         ) 
         {
         	Class[] columnTypes = new Class[] {String.class, String.class, String.class, Double.class, String.class};
-        	new Object[][] {},new String[] {"Barcode", "Book Name", "Edition", "Price", "Genre"}
-        ) 
-        {
-        	Class[] columnTypes = new Class[] {String.class, String.class, String.class, Double.class, String.class};
         	public Class getColumnClass(int columnIndex) {
         		return columnTypes[columnIndex];
         	}
         });
         scrollPane.setViewportView(table_1);
-
-        model = new DefaultTableModel();
-        DefaultTableModel model= (DefaultTableModel)table_1.getModel();
-        MySQLDeneme.loadBooks(model);
         
         //IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
         //STOCKCARD--------------------------------------------------------------------------------------------------------------
@@ -533,170 +447,36 @@ public class menu2 extends JFrame {
         stateGroup.add(rdbtnout);
 
         
-        
         JButton btnEnter = new JButton("Enter");
         btnEnter.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		/*
-        		 * SEARCH
-                String barcode = txtsbarcode.getText();
-                Books foundBook = searchBookByBarcode(barcode);
-                
-                if (foundBook != null) {
-                	
-                    txtbarcode.setText(foundBook.getBarcode());
-                    txtbname.setText(foundBook.getName());
-                    txtedition.setText(foundBook.getEdition());
-                    txtprice.setText(String.valueOf(foundBook.getPrice()));
-                    String genre = foundBook.getGenre();
-                   
-                } 
-                else{
-                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
-                }
-                
-                ADD
-                
-                	
-                String barcode = txtbarcode.getText();
-                String bookName = txtbname.getText();
-                String edition = txtedition.getText();
-                double price = Double.parseDouble(txtprice.getText());
-                String genre = "";
-                if (rdbtnhorror.isSelected()) {
-                    genre = "Horror";
-                } else if (rdbtnromance.isSelected()) {
-                    genre = "Romance";
-                } else if (rdbtnmystery.isSelected()) {
-                    genre = "Mystery";
-                } else if (rdbtnpoetry.isSelected()) {
-                    genre = "Poetry";
-                }
-                
-                
-                if (!isBarcodeUnique(barcode)) {
-                	JOptionPane.showMessageDialog(null, "Barcode has been already used.");
-                }
-                else {
-                Books book = new Books(barcode, bookName, edition, price, genre);
-                books.add(book);
-                JOptionPane.showMessageDialog(null, "Book saved successfully.");
-                
-                model = new DefaultTableModel();
-                DefaultTableModel model= (DefaultTableModel)table_1.getModel();
-                model.addRow(new Object[]{barcode, bookName, edition, price, genre});
-                }
-                
-                UPDATE
-                
-                String barcode = txtbarcode.getText();
-                Books foundBook = searchBookByBarcode(barcode);
-                
-                if (foundBook != null) {
-                	
-                    String updatedName = txtbname.getText();
-                    String updatedEdition = txtedition.getText();
-                    double updatedPrice = Double.parseDouble(txtprice.getText());
-
-                    
-                    String updatedGenre = "";
-                    if (rdbtnhorror.isSelected()) {
-                        updatedGenre = "Horror";
-                    } else if (rdbtnromance.isSelected()) {
-                        updatedGenre = "Romance";
-                    } else if (rdbtnmystery.isSelected()) {
-                        updatedGenre = "Mystery";
-                    } else if (rdbtnpoetry.isSelected()) {
-                        updatedGenre = "Poetry";
-                    }
-                    
-                    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-                    foundBook.setName(updatedName);
-                    foundBook.setEdition(updatedEdition);
-                    foundBook.setPrice(updatedPrice);
-                    foundBook.setGenre(updatedGenre);
-
-                    
-                    updateBookInTable1(foundBook);
-                    
-                    JOptionPane.showMessageDialog(menuframe, "Book updated successfully.");
-                } 
-                else {
-                    JOptionPane.showMessageDialog(menuframe, "Book not found.");
-                }	
-                	
-                	//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        		 
         		
-                String barcode = txtBarcode.getText();
-                Books foundBook = searchBookByBarcode(barcode);
-                int quantity = Integer.parseInt(txtQuantity.getText());
-                double price=foundBook.getPrice();
-                int state = 0;
-                
-                
                 String barcode = txtBarcode.getText();
                 int quantity = Integer.parseInt(txtQuantity.getText());
                 double price = searchBookByBarcode(barcode).getPrice();
                 int state = rdbtnın.isSelected() ? 1 : -1;
+                Books foundBook = searchBookByBarcode(barcode);
                 
                 quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price));
+                //updateQuantityTotals();
                 
                 DefaultTableModel model = (DefaultTableModel) table_2.getModel();
-                model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? price : "", state == -1 ? quantity : "", state == -1 ? price * -1 : "", "", "", ""});
-				
-                
-                if (foundBook != null) {
-                	foundBook.setQuantity(quantity);
-                	if (rdbtnın.isSelected()) {
-                        state = 1;
-                        foundBook.setState(state);
-                    } else if (rdbtnout.isSelected()) {
-                        state = -1; 
-                        foundBook.setState(state);
-                    }
-                	
-                    foundBook.setQuantity(foundBook.getQuantity() + (quantity * state));
-                	updateBookInTable2(foundBook);
-                	JOptionPane.showMessageDialog(menuframe, "Book Stock updated successfully.");
-                } 
-                else{
-                	JOptionPane.showMessageDialog(menuframe, "Book not found.");
-                }
-                */
-                //barcodeun priceını variable olarak al
-                //quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price));
-                
-                /*
-                DefaultTableModel model = (DefaultTableModel) table_2.getModel();
-                model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? quantity : "", state == -1 ? quantity : "", state == -1 ? quantity * -1 : "", "", "", ""});
-				
+                model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? price : "", state == -1 ? quantity : "", state == -1 ? price : "", "", ""});
+
                 
                 if (foundBook != null) {
                     foundBook.setQuantity(foundBook.getQuantity() + (quantity * state));
+                    //CHANGE
                     updateBookInTable2(foundBook);
                     JOptionPane.showMessageDialog(menuframe, "Book Stock updated successfully.");
                 } else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
                 }
                
-        		
-        		
-                String barcode = txtBarcode.getText();
-                int quantity = Integer.parseInt(txtQuantity.getText());
-                int state = rdbtnın.isSelected() ? 1 : -1;
-                double price = searchBookByBarcode(barcode).getPrice();
-
-                quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price));
-
-                // Call the method to update the table with the new quantity information
-                QuantityUpdate();
-
-                */
         	}
+        	
         });
-
+		
         
         btnEnter.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnEnter.setBounds(589, 21, 85, 40);
@@ -721,9 +501,15 @@ public class menu2 extends JFrame {
         	public boolean isCellEditable(int row, int column) {
         		return columnEditables[column];
         	}
+        	
+        	
         });
         
+        
+        
+    
         menuframe.setVisible(true);
+
 	}
 
 
@@ -749,15 +535,10 @@ public class menu2 extends JFrame {
     
     private void clear() {
     	
-    	txtbarcode.setText("");
+        txtbarcode.setText("");
         txtbname.setText("");
         txtedition.setText("");
         txtprice.setText("");
-        
-        rdbtnhorror.setSelected(false);
-        rdbtnromance.setSelected(false);
-        rdbtnmystery.setSelected(false);
-        rdbtnpoetry.setSelected(false);
         
     }
     
@@ -789,7 +570,7 @@ public class menu2 extends JFrame {
     	for (int i =0; i < table_2.getRowCount(); i++) {
             if (table_2.getValueAt(i, 0).equals(book.getBarcode())) {
                 DefaultTableModel model = (DefaultTableModel) table_2.getModel();
-                model.setValueAt(book.getQuantity() > 0 ? book.getQuantity() : "", i, 1);
+                model.setValueAt(book.getQuantity(), i, 1);
                 model.setValueAt(book.getState() == 1 ? book.getQuantity() * book.getPrice() : "", i, 2);
                 model.setValueAt(book.getState() == -1 ? book.getQuantity() : "", i, 3);
                 model.setValueAt(book.getState() == -1 ? book.getQuantity() * book.getPrice() * -1 : "", i, 4);
@@ -801,34 +582,29 @@ public class menu2 extends JFrame {
     }
     
     
-    private void QuantityUpdate() {
-        Map<String, Double> quantityMap = new HashMap<>();
+    private void updateQuantityTotals() {
+        Map<String, Integer> quantityMap = new HashMap<>();
         
         for (QuantityUpdate update : quantityUpdates) {
             String barcode = update.getBarcode();
             int quantity = update.getQuantity();
             int state = update.getState();
-            double price = update.getPrice();
             
-            quantityMap.put(barcode, (quantityMap.getOrDefault(barcode, 0.0) + (state * quantity * price)));
+            quantityMap.put(barcode, quantityMap.getOrDefault(barcode, 0) + (state * quantity * state));
         }
 
         DefaultTableModel model = (DefaultTableModel) table_2.getModel();
-        //model.setRowCount(0);
+        model.setRowCount(0);
         
-        for (Map.Entry<String, Double> entry : quantityMap.entrySet()) {
+        for (Map.Entry<String, Integer> entry : quantityMap.entrySet()) {
             model.addRow(new Object[]{entry.getKey(), entry.getValue()});
         }
     }
     
-
     
-
+    
     
 }
-    
-    
-
 
 
 

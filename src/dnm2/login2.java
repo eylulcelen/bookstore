@@ -1,7 +1,7 @@
 package dnm2;
 
 
-import database.MySQLDeneme;
+//import database.MySQLDeneme;
 
 
 import java.awt.BorderLayout;
