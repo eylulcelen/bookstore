@@ -1,14 +1,6 @@
 package dnm2;
 
-
-import database.MySQLDeneme;
-
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import java.util.ArrayList;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,11 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
-import java.awt.GridLayout;
 
 public class login2 extends JFrame {
 	
@@ -53,51 +43,51 @@ public class login2 extends JFrame {
         frame.getContentPane().add(panel);
         panel.setLayout(null);
         
-                JLabel lblUsername = new JLabel("Username:");
-                lblUsername.setBounds(28, 32, 99, 21);
-                panel.add(lblUsername);
-                lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel lblUsername = new JLabel("Username:");
+        lblUsername.setBounds(28, 32, 99, 21);
+        panel.add(lblUsername);
+        lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 15));
                 
-                        usernameField = new JTextField();
-                        usernameField.setBounds(175, 32, 193, 20);
-                        panel.add(usernameField);
-                        usernameField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                        usernameField.setColumns(10);
+        usernameField = new JTextField();
+        usernameField.setBounds(175, 32, 193, 20);
+        panel.add(usernameField);
+        usernameField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        usernameField.setColumns(10);
                         
-                                JLabel lblPassword = new JLabel("Password:");
-                                lblPassword.setBounds(28, 77, 99, 21);
-                                panel.add(lblPassword);
-                                lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel lblPassword = new JLabel("Password:");
+        lblPassword.setBounds(28, 77, 99, 21);
+        panel.add(lblPassword);
+        lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 15));
                                 
-                                        passwordField = new JPasswordField();
-                                        passwordField.setBounds(175, 77, 193, 20);
-                                        panel.add(passwordField);
-                                        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        passwordField = new JPasswordField();
+        passwordField.setBounds(175, 77, 193, 20);
+        panel.add(passwordField);
+        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
                                         
-                                                JButton btnLogin = new JButton("Login");
-                                                btnLogin.setBounds(152, 141, 80, 49);
-                                                panel.add(btnLogin);
-                                                btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-                                                btnLogin.addActionListener(new ActionListener() {
-                                                    public void actionPerformed(ActionEvent e) {
+        JButton btnLogin = new JButton("Login");
+        btnLogin.setBounds(152, 141, 80, 49);
+        panel.add(btnLogin);
+        btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnLogin.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
                                                     	
-                                                        String username = usernameField.getText();
-                                                        String password = new String(passwordField.getPassword());
-                                                        
-                                                        if (login(username, password)) {
-                                                            JOptionPane.showMessageDialog(frame, "Login successful.");
-                                                            // Additional actions after successful login can be added here
-                                                            frame.dispose(); // Close login window
-                                                            //create object
-                                                            new menu2();
+                String username = usernameField.getText();
+                String password = new String(passwordField.getPassword());
+
+                if (login(username, password)) {
+                    JOptionPane.showMessageDialog(frame, "Login successful.");
+                    // Additional actions after successful login can be added here
+                    frame.dispose(); // Close login window
+                    //create object
+                    new menu2();
                                                             
-                                                        } 
-                                                        else {
-                                                            JOptionPane.showMessageDialog(frame, "Invalid username or password. Please try again.");
-                                                          
-                                                        }
-                                                    }
-                                                });
+                }
+                else {
+                    JOptionPane.showMessageDialog(frame, "Invalid username or password. Please try again.");
+
+                }
+            }
+        });
 
         frame.setVisible(true);
     }
