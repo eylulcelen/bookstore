@@ -1,6 +1,12 @@
 package dnm2;
 
+import database.MySQLDeneme;
+
 import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -48,7 +54,7 @@ public class menu2 extends JFrame {
 	private JTextArea textArea;
 	private DefaultTableModel model;
 	private JTable table;
-	private JTextField txtbarcode;
+	private static JTextField txtbarcode;
 	private JTable table_1;
 	private JRadioButton rdbtnhorror;
 	private JRadioButton rdbtnromance;
@@ -57,9 +63,20 @@ public class menu2 extends JFrame {
 	private JTextField txtBarcode;
 	private JTextField txtQuantity;
 	private JTable table_2;
+	private JRadioButton rdbtnhorror;
+	private JRadioButton rdbtnromance;
+	private JRadioButton rdbtnmystery;
+	private JRadioButton rdbtnpoetry;
 
+    public static JTextField getTxtbname() {return txtbname;}
 
-	/**
+    public static JTextField getTxtedition() {return txtedition;}
+
+    public static JTextField getTxtprice() {return txtprice;}
+
+    public static JTextField getTxtbarcode() {return txtbarcode;}
+
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -76,14 +93,18 @@ public class menu2 extends JFrame {
 	 */
 	
 	public menu2() {
-		
+
+
+
 		JFrame menuframe = new JFrame();
 		menuframe.setTitle("Book Management System");
+        menuframe.setBounds(100, 100, 760, 500);
         menuframe.setBounds(100, 100, 760, 500);
         menuframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuframe.getContentPane().setLayout(null);
         
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+        tabbedPane.setBounds(10, 10, 731, 458);
         tabbedPane.setBounds(10, 10, 731, 458);
         menuframe.getContentPane().add(tabbedPane);
         
@@ -101,6 +122,7 @@ public class menu2 extends JFrame {
         JPanel panelinfo = new JPanel();
         panelinfo.setBorder(new TitledBorder(null, "Registeration", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         panelinfo.setBounds(20, 56, 266, 243);
+        panelinfo.setBounds(20, 56, 266, 243);
         panelbc.add(panelinfo);
         panelinfo.setLayout(null);
         
@@ -111,6 +133,7 @@ public class menu2 extends JFrame {
         
         txtprice = new JTextField();
         txtprice.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtprice.setBounds(124, 112, 104, 21);
         txtprice.setBounds(124, 112, 104, 21);
         panelinfo.add(txtprice);
         txtprice.setColumns(10);
@@ -124,6 +147,7 @@ public class menu2 extends JFrame {
         txtbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtbarcode.setColumns(10);
         txtbarcode.setBounds(124, 21, 104, 21);
+        txtbarcode.setBounds(124, 21, 104, 21);
         panelinfo.add(txtbarcode);
         
         JLabel lblbname = new JLabel("Book Name:");
@@ -132,6 +156,7 @@ public class menu2 extends JFrame {
         lblbname.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
         txtbname = new JTextField();
+        txtbname.setBounds(124, 51, 104, 21);
         txtbname.setBounds(124, 51, 104, 21);
         panelinfo.add(txtbname);
         txtbname.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -143,6 +168,7 @@ public class menu2 extends JFrame {
         lbledition.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
         txtedition = new JTextField();
+        txtedition.setBounds(124, 81, 104, 21);
         txtedition.setBounds(124, 81, 104, 21);
         panelinfo.add(txtedition);
         txtedition.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -198,6 +224,16 @@ public class menu2 extends JFrame {
                 } else if (rdbtnpoetry.isSelected()) {
                     genre = "Poetry";
                 }
+                String genre = "";
+                if (rdbtnhorror.isSelected()) {
+                    genre = "Horror";
+                } else if (rdbtnromance.isSelected()) {
+                    genre = "Romance";
+                } else if (rdbtnmystery.isSelected()) {
+                    genre = "Mystery";
+                } else if (rdbtnpoetry.isSelected()) {
+                    genre = "Poetry";
+                }
                 
                 
                 if (!isBarcodeUnique(barcode)) {
@@ -205,19 +241,25 @@ public class menu2 extends JFrame {
                 }
                 else {
                 Books book = new Books(barcode, bookName, edition, price, genre);
+                Books book = new Books(barcode, bookName, edition, price, genre);
                 books.add(book);
                 JOptionPane.showMessageDialog(null, "Book saved successfully.");
+
+                MySQLDeneme.addBook(Integer.parseInt(barcode), bookName, Integer.parseInt(edition), price);
                 
                 model = new DefaultTableModel();
                 DefaultTableModel model= (DefaultTableModel)table_1.getModel();
+                model.addRow(new Object[]{barcode, bookName, edition, price, genre});
                 model.addRow(new Object[]{barcode, bookName, edition, price, genre});
                 }
                 
         	}
         });
-        
+
+
         
         btnsave.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnsave.setBounds(30, 309, 85, 37);
         btnsave.setBounds(30, 309, 85, 37);
         panelbc.add(btnsave);
         
@@ -230,16 +272,19 @@ public class menu2 extends JFrame {
         btnclear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                clear();
+               clear();
             }
         });
         
         
         btnclear.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnclear.setBounds(185, 309, 85, 39);
+        btnclear.setBounds(185, 309, 85, 39);
         panelbc.add(btnclear);
         
         JPanel searchpanel = new JPanel();
         searchpanel.setBorder(new TitledBorder(null, "Search", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        searchpanel.setBounds(384, 271, 266, 127);
         searchpanel.setBounds(384, 271, 266, 127);
         panelbc.add(searchpanel);
         searchpanel.setLayout(null);
@@ -247,11 +292,13 @@ public class menu2 extends JFrame {
         JLabel lblsbarcode = new JLabel("Book's barcode:");
         lblsbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblsbarcode.setBounds(10, 35, 130, 19);
+        lblsbarcode.setBounds(10, 35, 130, 19);
         searchpanel.add(lblsbarcode);
         
         txtsbarcode = new JTextField();
         txtsbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtsbarcode.setColumns(10);
+        txtsbarcode.setBounds(131, 34, 125, 21);
         txtsbarcode.setBounds(131, 34, 125, 21);
         searchpanel.add(txtsbarcode);
         
@@ -287,14 +334,17 @@ public class menu2 extends JFrame {
                     
                 } 
                 else{
-                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    JOptionPane.showMessageDialog(menuframe, "Book not found.");
                 }
+
+                MySQLDeneme.searchBook(barcode);
             	
             }
         });
     
 
         btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnSearch.setBounds(81, 77, 85, 40);
         btnSearch.setBounds(81, 77, 85, 40);
         searchpanel.add(btnSearch);
         
@@ -326,24 +376,47 @@ public class menu2 extends JFrame {
                     
                     //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
+
+                    
+                    String updatedGenre = "";
+                    if (rdbtnhorror.isSelected()) {
+                        updatedGenre = "Horror";
+                    } else if (rdbtnromance.isSelected()) {
+                        updatedGenre = "Romance";
+                    } else if (rdbtnmystery.isSelected()) {
+                        updatedGenre = "Mystery";
+                    } else if (rdbtnpoetry.isSelected()) {
+                        updatedGenre = "Poetry";
+                    }
+                    
+                    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
                     foundBook.setName(updatedName);
                     foundBook.setEdition(updatedEdition);
                     foundBook.setPrice(updatedPrice);
+                    foundBook.setGenre(updatedGenre);
+
                     foundBook.setGenre(updatedGenre);
 
                     
                     updateBookInTable1(foundBook);
                     
                     JOptionPane.showMessageDialog(menuframe, "Book updated successfully.");
-                } 
+
+
+                }
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
-                }	
+
+                }
             }
+
+
         });
         
         
         btnupdate.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnupdate.setBounds(355, 206, 85, 40);
         btnupdate.setBounds(355, 206, 85, 40);
         panelbc.add(btnupdate);
         
@@ -362,21 +435,26 @@ public class menu2 extends JFrame {
                     
                     JOptionPane.showMessageDialog(menuframe, "Book deleted successfully.");
                     clear();
+                    clear();
                 } 
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
                 }
+
+                MySQLDeneme.deleteBook(barcode);
             }
         });
         
         
         btndelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btndelete.setBounds(605, 206, 85, 40);
+        btndelete.setBounds(605, 206, 85, 40);
         panelbc.add(btndelete);
         
         
         
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(345, 17, 360, 181);
         scrollPane.setBounds(345, 17, 360, 181);
         panelbc.add(scrollPane);
         
@@ -386,11 +464,19 @@ public class menu2 extends JFrame {
         ) 
         {
         	Class[] columnTypes = new Class[] {String.class, String.class, String.class, Double.class, String.class};
+        	new Object[][] {},new String[] {"Barcode", "Book Name", "Edition", "Price", "Genre"}
+        ) 
+        {
+        	Class[] columnTypes = new Class[] {String.class, String.class, String.class, Double.class, String.class};
         	public Class getColumnClass(int columnIndex) {
         		return columnTypes[columnIndex];
         	}
         });
         scrollPane.setViewportView(table_1);
+
+        model = new DefaultTableModel();
+        DefaultTableModel model= (DefaultTableModel)table_1.getModel();
+        MySQLDeneme.loadBooks(model);
         
         //IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
         //STOCKCARD--------------------------------------------------------------------------------------------------------------

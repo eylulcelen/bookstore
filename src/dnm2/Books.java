@@ -7,9 +7,12 @@ public class Books {
 	private double price;
 	private String barcode;
 	private String genre;
+<<<<<<< HEAD
 	private int quantity;
 	private int state; 
 	//in out=state
+=======
+>>>>>>> 0c9681eddda56293c14e93d02e5a1682cf62b0f0
 	
 	
 	public double calculateBalancePrice() {
@@ -24,6 +27,7 @@ public class Books {
 	    return calculateBalanceQuantity() * price;
 	}
 	
+<<<<<<< HEAD
     public int getState() {
 		return state;
 	}
@@ -41,6 +45,9 @@ public class Books {
 	}
 
 	public Books(String barcode, String name, String edition, double price, String genre) {
+=======
+    public Books(String barcode, String name, String edition, double price, String genre) {
+>>>>>>> 0c9681eddda56293c14e93d02e5a1682cf62b0f0
         
         this.barcode = barcode;
         this.name = name;
