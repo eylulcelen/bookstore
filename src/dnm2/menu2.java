@@ -16,11 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
@@ -31,8 +26,6 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
-import javax.swing.ImageIcon;
 
 
 public class menu2 extends JFrame {
@@ -41,9 +34,12 @@ public class menu2 extends JFrame {
 	private static ArrayList<String> usedBarcodes = new ArrayList<>();
 	private Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
 
+
 	private JTextField txtbname;
 	private JTextField txtedition;
 	private JTextField txtprice;
+
+
 	private JTextField txtsbarcode;
 	private JTextArea textArea;
 	private DefaultTableModel model;
@@ -57,6 +53,7 @@ public class menu2 extends JFrame {
 	private JTextField txtBarcode;
 	private JTextField txtQuantity;
 	private JTable table_2;
+
 
 
 	/**
@@ -198,8 +195,7 @@ public class menu2 extends JFrame {
                 } else if (rdbtnpoetry.isSelected()) {
                     genre = "Poetry";
                 }
-                
-                
+
                 if (!isBarcodeUnique(barcode)) {
                 	JOptionPane.showMessageDialog(null, "Barcode has been already used.");
                 }
@@ -362,9 +358,9 @@ public class menu2 extends JFrame {
                     
                     JOptionPane.showMessageDialog(menuframe, "Book deleted successfully.");
                     clear();
-                } 
-                else {
+                    {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    }
                 }
             }
         });
@@ -383,6 +379,7 @@ public class menu2 extends JFrame {
         table_1 = new JTable();
         table_1.setModel(new DefaultTableModel(
         	new Object[][] {},new String[] {"Barcode", "Book Name", "Edition", "Price", "Genre"}
+
         ) 
         {
         	Class[] columnTypes = new Class[] {String.class, String.class, String.class, Double.class, String.class};
@@ -390,6 +387,9 @@ public class menu2 extends JFrame {
         		return columnTypes[columnIndex];
         	}
         });
+        
+
+
         scrollPane.setViewportView(table_1);
         
         //IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII

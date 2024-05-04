@@ -10,7 +10,6 @@ public class Books {
 	private int quantity;
 	private int state; 
 	//in out=state
-	
 
 	public double calculateBalancePrice() {
 	    return price;
