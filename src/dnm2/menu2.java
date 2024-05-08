@@ -455,24 +455,23 @@ public class menu2 extends JFrame {
                 int quantity = Integer.parseInt(txtQuantity.getText());
                 double price = searchBookByBarcode(barcode).getPrice();
                 int state = rdbtnın.isSelected() ? 1 : -1;
+                int balance = quantity * state;
+                
                 Books foundBook = searchBookByBarcode(barcode);
                 
-                quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price));
-                //updateQuantityTotals();
+                quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price, balance));
+                updateQuantityTotals();
                 
                 DefaultTableModel model = (DefaultTableModel) table_2.getModel();
-                model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? price : "", state == -1 ? quantity : "", state == -1 ? price : "", "", ""});
-
+                model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? price : "", state == -1 ? quantity : "", state == -1 ? price : "", balance, balance*price});
                 
                 if (foundBook != null) {
-                    foundBook.setQuantity(foundBook.getQuantity() + (quantity * state));
-                    //CHANGE
+                    foundBook.setBalance(foundBook.getQuantity() + (quantity * state));
                     updateBookInTable2(foundBook);
                     JOptionPane.showMessageDialog(menuframe, "Book Stock updated successfully.");
                 } else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
                 }
-               
         	}
         	
         });
@@ -589,16 +588,24 @@ public class menu2 extends JFrame {
             String barcode = update.getBarcode();
             int quantity = update.getQuantity();
             int state = update.getState();
+            double price = update.getPrice();
+            int balance = update.getBalance();
+            balance=state * quantity;
+            quantityMap.put(barcode, quantityMap.getOrDefault(barcode, 0) + (balance));
             
-            quantityMap.put(barcode, quantityMap.getOrDefault(barcode, 0) + (state * quantity * state));
         }
 
         DefaultTableModel model = (DefaultTableModel) table_2.getModel();
-        model.setRowCount(0);
+        
         
         for (Map.Entry<String, Integer> entry : quantityMap.entrySet()) {
-            model.addRow(new Object[]{entry.getKey(), entry.getValue()});
+        	Books book = searchBookByBarcode(entry.getKey());
+            double price = book != null ? book.getPrice() : 0.0;
+            model.addRow(new Object[]{entry.getKey(),"","","","" ,entry.getValue(),entry.getValue()*price});
+            
         }
+
+        
     }
     
     

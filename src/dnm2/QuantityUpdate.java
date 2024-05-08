@@ -5,7 +5,22 @@ public class QuantityUpdate {
     private int quantity;
     private int state;
     private double price;
+    private int balance;
     
+	public QuantityUpdate(String barcode, int quantity, int state, double price, int balance) {
+		super();
+		this.barcode = barcode;
+		this.quantity = quantity;
+		this.state = state;
+		this.price = price;
+		this.balance = balance;
+	}
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
 	public String getBarcode() {
 		return barcode;
 	}
@@ -30,13 +45,5 @@ public class QuantityUpdate {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public QuantityUpdate(String barcode, int quantity, int state, double price) {
-		super();
-		this.barcode = barcode;
-		this.quantity = quantity;
-		this.state = state;
-		this.price = price;
-	}
-        
 }
 

@@ -30,8 +30,8 @@ public class login2 extends JFrame {
 
     public login2() {
         
-        users.add(new Users("admin", "123"));
-        users.add(new Users("dilara", "1103"));
+        users.add(new Users("emre", "7"));
+        users.add(new Users("selin", "19"));
 
         frame = new JFrame("Book Management System");
         frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 10));

@@ -10,6 +10,15 @@ public class Books {
 	private int quantity;
 	private int state; 
 	//in out=state
+	private int balance;
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
 
 	public double calculateBalancePrice() {
 	    return price;
@@ -17,10 +26,12 @@ public class Books {
 
 	public int calculateBalanceQuantity() {
 	    return quantity*state;
+		
 	}
 
 	public double calculateBalanceValue() {
 	    return calculateBalanceQuantity() * price;
+		
 	}
 	
     public int getState() {
