@@ -1,5 +1,6 @@
 package dnm2;
 
+import database.MySQL;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,10 +47,10 @@ public class menu2 extends JFrame {
 	private JTable table;
 	private static JTextField txtbarcode;
 	private JTable table_1;
-	private JRadioButton rdbtnhorror;
-	private JRadioButton rdbtnromance;
-	private JRadioButton rdbtnmystery;
-	private JRadioButton rdbtnpoetry;
+	private static JRadioButton rdbtnhorror;
+	private static JRadioButton rdbtnromance;
+	private static JRadioButton rdbtnmystery;
+	private static JRadioButton rdbtnpoetry;
 	private JTextField txtBarcode;
 	private JTextField txtQuantity;
 	private JTable table_2;
@@ -70,6 +71,22 @@ public class menu2 extends JFrame {
         return txtbarcode;
     }
 
+    public static JRadioButton getRdbtnhorror() {
+        return rdbtnhorror;
+    }
+
+    public static JRadioButton getRdbtnromance() {
+        return rdbtnromance;
+    }
+
+    public static JRadioButton getRdbtnmystery() {
+        return rdbtnmystery;
+    }
+
+    public static JRadioButton getRdbtnpoetry() {
+        return rdbtnpoetry;
+    }
+
     /**
 	 * Launch the application.
 	 */
@@ -87,6 +104,8 @@ public class menu2 extends JFrame {
 	 */
 	
 	public menu2() {
+
+
 		
 		JFrame menuframe = new JFrame();
 		menuframe.setTitle("Book Management System");
@@ -189,7 +208,8 @@ public class menu2 extends JFrame {
         genreGroup.add(rdbtnromance);
         genreGroup.add(rdbtnmystery);
         genreGroup.add(rdbtnpoetry);
-        
+
+
         
         JButton btnsave = new JButton("Save");
         btnsave.addActionListener(new ActionListener() {
@@ -401,10 +421,14 @@ public class menu2 extends JFrame {
         		return columnTypes[columnIndex];
         	}
         });
-        
+
 
 
         scrollPane.setViewportView(table_1);
+
+        model = new DefaultTableModel();
+        DefaultTableModel model= (DefaultTableModel)table_1.getModel();
+        MySQL.loadBooks(model);
         
         //IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
         //STOCKCARD--------------------------------------------------------------------------------------------------------------

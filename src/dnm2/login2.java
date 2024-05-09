@@ -1,11 +1,6 @@
 package dnm2;
 
 
-//import database.MySQLDeneme;
-
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import java.util.ArrayList;
 import javax.swing.JButton;

@@ -4,12 +4,10 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import dnm2.menu2;
 
-public class MySQLDeneme {
+public class MySQL {
 
 
-    public static void main(String[] args) {
-        printAllBooks();
-    }
+    public static void main(String[] args) {}
 
     public static void loadBooks(DefaultTableModel model) {
 
@@ -29,11 +27,12 @@ public class MySQLDeneme {
                         resultset.getInt(1),
                         resultset.getString(2),
                         resultset.getInt(3),
-                        Double.parseDouble(resultset.getString(4))});
+                        Double.parseDouble(resultset.getString(4)),
+                        resultset.getString(6)});
             }
             connection.close();
         }
-        catch(Exception e) {System.out.println(e);;}}
+        catch(Exception e) {System.out.println(e);}}
 
 
 
@@ -129,6 +128,37 @@ public class MySQLDeneme {
                 System.out.println(STR."\{resultset.getInt(1)} \{resultset.getString(2)} \{resultset.getInt(3)} \{resultset.getInt(4)}");
             }
             connection.close();
+        }
+        catch(Exception e) {System.out.println(e);}
+    }
+
+    public static void updateBook(String barcode) {
+        String url = "jdbc:mysql://localhost:3306/java_sql";
+        String username = "root";
+        String password = "frkn3756";
+
+        String updatedName = menu2.getTxtbname().getText();
+        String updatedEdition = menu2.getTxtedition().getText();
+        String updatedPrice = menu2.getTxtprice().getText();
+        String updatedGenre = "";
+        if (menu2.getRdbtnhorror().isSelected()) {
+            updatedGenre = "Horror";
+        } else if (menu2.getRdbtnromance().isSelected()) {
+            updatedGenre = "Romance";
+        } else if (menu2.getRdbtnmystery().isSelected()) {
+            updatedGenre = "Mystery";
+        } else if (menu2.getRdbtnpoetry().isSelected()) {
+            updatedGenre = "Poetry";
+        }
+        try {
+            String update = "UPDATE books SET Book_name = ?, Edition = ?, Price = ?, Genre = ?";
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = connection.prepareStatement(update);
+            statement.setString(1, updatedName);
+            statement.setString(2, updatedEdition);
+            statement.setString(3, updatedPrice);
+            statement.setString(4, updatedGenre);
         }
         catch(Exception e) {System.out.println(e);}
     }
