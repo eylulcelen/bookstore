@@ -1,7 +1,8 @@
 package dnm2;
 
 import database.MySQL;
-import java.awt.EventQueue;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -17,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Font;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -25,7 +25,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EtchedBorder;
-import java.awt.Color;
 import javax.swing.JRadioButton;
 
 
@@ -40,6 +39,7 @@ public class menu2 extends JFrame {
 	private static JTextField txtedition;
 	private static JTextField txtprice;
 
+    private static JTextField txtgenre;
 
 	private JTextField txtsbarcode;
 	private JTextArea textArea;
@@ -47,10 +47,6 @@ public class menu2 extends JFrame {
 	private JTable table;
 	private static JTextField txtbarcode;
 	private JTable table_1;
-	private static JRadioButton rdbtnhorror;
-	private static JRadioButton rdbtnromance;
-	private static JRadioButton rdbtnmystery;
-	private static JRadioButton rdbtnpoetry;
 	private JTextField txtBarcode;
 	private JTextField txtQuantity;
 	private JTable table_2;
@@ -71,21 +67,11 @@ public class menu2 extends JFrame {
         return txtbarcode;
     }
 
-    public static JRadioButton getRdbtnhorror() {
-        return rdbtnhorror;
+    public static JTextField getTxtgenre() {
+        return txtgenre;
     }
 
-    public static JRadioButton getRdbtnromance() {
-        return rdbtnromance;
-    }
 
-    public static JRadioButton getRdbtnmystery() {
-        return rdbtnmystery;
-    }
-
-    public static JRadioButton getRdbtnpoetry() {
-        return rdbtnpoetry;
-    }
 
     /**
 	 * Launch the application.
@@ -129,7 +115,7 @@ public class menu2 extends JFrame {
         panelbc.add(lblbcard);
         
         JPanel panelinfo = new JPanel();
-        panelinfo.setBorder(new TitledBorder(null, "Registeration", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panelinfo.setBorder(new TitledBorder(null, "Registration", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         panelinfo.setBounds(20, 56, 266, 243);
         panelbc.add(panelinfo);
         panelinfo.setLayout(null);
@@ -139,20 +125,18 @@ public class menu2 extends JFrame {
         panelinfo.add(lblprice);
         lblprice.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
-        txtprice = new JTextField();
+        txtprice = new JTextField(10);
         txtprice.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtprice.setBounds(124, 112, 104, 21);
         panelinfo.add(txtprice);
-        txtprice.setColumns(10);
-        
+
         JLabel lblbarcode = new JLabel("Barcode:");
         lblbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblbarcode.setBounds(10, 22, 104, 19);
         panelinfo.add(lblbarcode);
         
-        txtbarcode = new JTextField();
+        txtbarcode = new JTextField(10);
         txtbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtbarcode.setColumns(10);
         txtbarcode.setBounds(124, 21, 104, 21);
         panelinfo.add(txtbarcode);
         
@@ -161,29 +145,32 @@ public class menu2 extends JFrame {
         panelinfo.add(lblbname);
         lblbname.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
-        txtbname = new JTextField();
+        txtbname = new JTextField(10);
         txtbname.setBounds(124, 51, 104, 21);
         panelinfo.add(txtbname);
         txtbname.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtbname.setColumns(10);
-        
+
         JLabel lbledition = new JLabel("Edition:");
         lbledition.setBounds(10, 84, 104, 19);
         panelinfo.add(lbledition);
         lbledition.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
-        txtedition = new JTextField();
+        txtedition = new JTextField(10);
         txtedition.setBounds(124, 81, 104, 21);
         panelinfo.add(txtedition);
         txtedition.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtedition.setColumns(10);
-        
+
         JLabel lblgenre = new JLabel("Genre:");
         lblgenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblgenre.setBounds(10, 142, 104, 19);
         panelinfo.add(lblgenre);
+
+        txtgenre = new JTextField(10);
+        txtgenre.setBounds(124, 142, 104, 21);
+        txtgenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        panelinfo.add(txtgenre);
         
-        rdbtnhorror = new JRadioButton("Horror");
+        /*rdbtnhorror = new JRadioButton("Horror");
         rdbtnhorror.setFont(new Font("Tahoma", Font.PLAIN, 15));
         rdbtnhorror.setBounds(124, 141, 103, 21);
         panelinfo.add(rdbtnhorror);
@@ -207,7 +194,7 @@ public class menu2 extends JFrame {
         genreGroup.add(rdbtnhorror);
         genreGroup.add(rdbtnromance);
         genreGroup.add(rdbtnmystery);
-        genreGroup.add(rdbtnpoetry);
+        genreGroup.add(rdbtnpoetry);*/
 
 
         
@@ -219,16 +206,8 @@ public class menu2 extends JFrame {
                 String bookName = txtbname.getText();
                 String edition = txtedition.getText();
                 double price = Double.parseDouble(txtprice.getText());
-                String genre = "";
-                if (rdbtnhorror.isSelected()) {
-                    genre = "Horror";
-                } else if (rdbtnromance.isSelected()) {
-                    genre = "Romance";
-                } else if (rdbtnmystery.isSelected()) {
-                    genre = "Mystery";
-                } else if (rdbtnpoetry.isSelected()) {
-                    genre = "Poetry";
-                }
+                String genre = txtgenre.getText();
+
 
                 if (!isBarcodeUnique(barcode)) {
                 	JOptionPane.showMessageDialog(null, "Barcode has been already used.");
@@ -304,16 +283,8 @@ public class menu2 extends JFrame {
                     txtbname.setText(foundBook.getName());
                     txtedition.setText(foundBook.getEdition());
                     txtprice.setText(String.valueOf(foundBook.getPrice()));
-                    String genre = foundBook.getGenre();
-                    if (genre.equals("Horror")) {
-                        rdbtnhorror.setSelected(true);
-                    } else if (genre.equals("Romance")) {
-                        rdbtnromance.setSelected(true);
-                    } else if (genre.equals("Mystery")) {
-                        rdbtnmystery.setSelected(true);
-                    } else if (genre.equals("Poetry")) {
-                        rdbtnpoetry.setSelected(true);
-                    }
+                    txtgenre.setText(foundBook.getGenre());
+
                     
                 } 
                 else{
@@ -341,18 +312,8 @@ public class menu2 extends JFrame {
                     String updatedName = txtbname.getText();
                     String updatedEdition = txtedition.getText();
                     double updatedPrice = Double.parseDouble(txtprice.getText());
+                    String updatedGenre = txtgenre.getText();
 
-                    
-                    String updatedGenre = "";
-                    if (rdbtnhorror.isSelected()) {
-                        updatedGenre = "Horror";
-                    } else if (rdbtnromance.isSelected()) {
-                        updatedGenre = "Romance";
-                    } else if (rdbtnmystery.isSelected()) {
-                        updatedGenre = "Mystery";
-                    } else if (rdbtnpoetry.isSelected()) {
-                        updatedGenre = "Poetry";
-                    }
                     
                     //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
@@ -576,6 +537,7 @@ public class menu2 extends JFrame {
         txtbname.setText("");
         txtedition.setText("");
         txtprice.setText("");
+        txtgenre.setText("");
         
     }
     

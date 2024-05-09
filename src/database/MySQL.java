@@ -140,16 +140,8 @@ public class MySQL {
         String updatedName = menu2.getTxtbname().getText();
         String updatedEdition = menu2.getTxtedition().getText();
         String updatedPrice = menu2.getTxtprice().getText();
-        String updatedGenre = "";
-        if (menu2.getRdbtnhorror().isSelected()) {
-            updatedGenre = "Horror";
-        } else if (menu2.getRdbtnromance().isSelected()) {
-            updatedGenre = "Romance";
-        } else if (menu2.getRdbtnmystery().isSelected()) {
-            updatedGenre = "Mystery";
-        } else if (menu2.getRdbtnpoetry().isSelected()) {
-            updatedGenre = "Poetry";
-        }
+        String updatedGenre = menu2.getTxtgenre().getText();
+
         try {
             String update = "UPDATE books SET Book_name = ?, Edition = ?, Price = ?, Genre = ?";
             Class.forName("com.mysql.cj.jdbc.Driver");
