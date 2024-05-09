@@ -36,12 +36,12 @@ public class MySQL {
 
 
 
-    public static void addBook(int barcode, String bookName, int edition, Double price) {
+    public static void addBook(int barcode, String bookName, int edition, Double price, String genre) {
         String url = "jdbc:mysql://localhost:3306/java_sql";
         String username = "root";
         String password = "frkn3756";
 
-        String update = "INSERT INTO books VALUES (?, ?, ?, ?);";
+        String update = "INSERT INTO books VALUES (?, ?, ?, ?, ?, ?);";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -52,6 +52,7 @@ public class MySQL {
             statement.setString(2, bookName);
             statement.setInt(3, edition);
             statement.setDouble(4, price);
+            statement.setString(6, genre);
             statement.executeUpdate();
 
             connection.close();
@@ -106,6 +107,7 @@ public class MySQL {
             menu2.getTxtbname().setText(resultSet.getString(2));
             menu2.getTxtedition().setText(resultSet.getString(3));
             menu2.getTxtprice().setText(resultSet.getString(4));
+            menu2.getTxtgenre().setText(resultSet.getString(6));
 
             connection.close();
 
@@ -143,7 +145,7 @@ public class MySQL {
         String updatedGenre = menu2.getTxtgenre().getText();
 
         try {
-            String update = "UPDATE books SET Book_name = ?, Edition = ?, Price = ?, Genre = ?";
+            String update = "UPDATE books SET Book_name = ?, Edition = ?, Price = ?, Genre = ? WHERE barcode = ?";
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, username, password);
             PreparedStatement statement = connection.prepareStatement(update);
@@ -151,8 +153,12 @@ public class MySQL {
             statement.setString(2, updatedEdition);
             statement.setString(3, updatedPrice);
             statement.setString(4, updatedGenre);
+            statement.setString(5,barcode);
+            statement.executeUpdate();
         }
         catch(Exception e) {System.out.println(e);}
     }
+
+    public static void addBook(){}
 
 }

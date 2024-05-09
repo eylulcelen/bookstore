@@ -279,16 +279,19 @@ public class menu2 extends JFrame {
                     		"\nEdition: " + foundBook.getEdition() +"\nPrice: " + foundBook.getPrice());
                     */
                     
-                    txtbarcode.setText(foundBook.getBarcode());
+                    /*txtbarcode.setText(foundBook.getBarcode());
                     txtbname.setText(foundBook.getName());
                     txtedition.setText(foundBook.getEdition());
                     txtprice.setText(String.valueOf(foundBook.getPrice()));
-                    txtgenre.setText(foundBook.getGenre());
+                    txtgenre.setText(foundBook.getGenre());*/
+
+                    MySQL.searchBook(barcode);
 
                     
                 } 
                 else{
                      JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                     MySQL.searchBook(barcode);
                 }
             	
             }
@@ -324,11 +327,14 @@ public class menu2 extends JFrame {
 
                     
                     updateBookInTable1(foundBook);
+
+                    MySQL.updateBook(barcode);
                     
                     JOptionPane.showMessageDialog(menuframe, "Book updated successfully.");
                 } 
                 else {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    MySQL.updateBook(barcode);
                 }	
             }
         });
@@ -355,7 +361,9 @@ public class menu2 extends JFrame {
                     clear();
                     {
                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    MySQL.deleteBook(barcode);
                     }
+                    MySQL.deleteBook(barcode);
                 }
             }
         });
