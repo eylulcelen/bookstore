@@ -36,22 +36,29 @@ public class MySQL {
 
 
 
-    public static void addBook(int barcode, String bookName, int edition, Double price, String genre) {
+    public static void addBook() {
         String url = "jdbc:mysql://localhost:3306/java_sql";
         String username = "root";
         String password = "frkn3756";
 
         String update = "INSERT INTO books VALUES (?, ?, ?, ?, ?, ?);";
 
+        String barcode = menu2.getTxtbarcode().getText();
+        String name = menu2.getTxtbname().getText();
+        String edition = menu2.getTxtedition().getText();
+        String price = menu2.getTxtprice().getText();
+        String genre = menu2.getTxtgenre().getText();
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             Connection connection = DriverManager.getConnection(url, username, password);
             PreparedStatement statement = connection.prepareStatement(update);
-            statement.setInt(1, barcode);
-            statement.setString(2, bookName);
-            statement.setInt(3, edition);
-            statement.setDouble(4, price);
+            statement.setString(1, barcode);
+            statement.setString(2, name);
+            statement.setString(3, edition);
+            statement.setString(4, price);
+            statement.setString(5,"0");
             statement.setString(6, genre);
             statement.executeUpdate();
 
@@ -115,24 +122,7 @@ public class MySQL {
             System.out.println(e);
         }
     }
-    public static void printAllBooks() {
-        String url = "jdbc:mysql://localhost:3306/java_sql";
-        String username = "root";
-        String password = "frkn3756";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
 
-            Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM books");
-
-            while(resultset.next()) {
-                System.out.println(STR."\{resultset.getInt(1)} \{resultset.getString(2)} \{resultset.getInt(3)} \{resultset.getInt(4)}");
-            }
-            connection.close();
-        }
-        catch(Exception e) {System.out.println(e);}
-    }
 
     public static void updateBook(String barcode) {
         String url = "jdbc:mysql://localhost:3306/java_sql";
@@ -159,6 +149,49 @@ public class MySQL {
         catch(Exception e) {System.out.println(e);}
     }
 
-    public static void addBook(){}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static void printAllBooks() {
+        String url = "jdbc:mysql://localhost:3306/java_sql";
+        String username = "root";
+        String password = "frkn3756";
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM books");
+
+            while(resultset.next()) {
+                System.out.println(STR."\{resultset.getInt(1)} \{resultset.getString(2)} \{resultset.getInt(3)} \{resultset.getInt(4)}");
+            }
+            connection.close();
+        }
+        catch(Exception e) {System.out.println(e);}
+    }
 
 }

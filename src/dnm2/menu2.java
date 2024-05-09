@@ -34,19 +34,18 @@ public class menu2 extends JFrame {
 	private static ArrayList<String> usedBarcodes = new ArrayList<>();
 	private Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
 
-
 	private static JTextField txtbname;
 	private static JTextField txtedition;
 	private static JTextField txtprice;
-
     private static JTextField txtgenre;
-
 	private JTextField txtsbarcode;
+
 	private JTextArea textArea;
 	private DefaultTableModel model;
 	private JTable table;
 	private static JTextField txtbarcode;
-	private JTable table_1;
+
+    private JTable table_1;
 	private JTextField txtBarcode;
 	private JTextField txtQuantity;
 	private JTable table_2;
@@ -216,6 +215,7 @@ public class menu2 extends JFrame {
                 Books book = new Books(barcode, bookName, edition, price, genre);
                 books.add(book);
                 JOptionPane.showMessageDialog(null, "Book saved successfully.");
+                MySQL.addBook();
                 
                 model = new DefaultTableModel();
                 DefaultTableModel model= (DefaultTableModel)table_1.getModel();
