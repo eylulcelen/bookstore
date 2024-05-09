@@ -35,16 +35,16 @@ public class menu2 extends JFrame {
 	private Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
 
 
-	private JTextField txtbname;
-	private JTextField txtedition;
-	private JTextField txtprice;
+	private static JTextField txtbname;
+	private static JTextField txtedition;
+	private static JTextField txtprice;
 
 
 	private JTextField txtsbarcode;
 	private JTextArea textArea;
 	private DefaultTableModel model;
 	private JTable table;
-	private JTextField txtbarcode;
+	private static JTextField txtbarcode;
 	private JTable table_1;
 	private JRadioButton rdbtnhorror;
 	private JRadioButton rdbtnromance;
@@ -54,9 +54,23 @@ public class menu2 extends JFrame {
 	private JTextField txtQuantity;
 	private JTable table_2;
 
+    public static JTextField getTxtbname() {
+        return txtbname;
+    }
 
+    public static JTextField getTxtedition() {
+        return txtedition;
+    }
 
-	/**
+    public static JTextField getTxtprice() {
+        return txtprice;
+    }
+
+    public static JTextField getTxtbarcode() {
+        return txtbarcode;
+    }
+
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
