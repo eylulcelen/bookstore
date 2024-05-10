@@ -2,6 +2,9 @@ package database;
 
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
+import java.util.ArrayList;
+
+import dnm2.Books;
 import dnm2.menu2;
 
 public class MySQL {
@@ -165,7 +168,30 @@ public class MySQL {
     }
 
 
+    public static void loadBooksToArray(ArrayList<Books> array) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
+            Connection connection = DriverManager.getConnection(url, username, password);
+            Statement statement = connection.createStatement();
+            ResultSet resultset = statement.executeQuery("SELECT * FROM books");
+
+
+            while(resultset.next()) {
+                String barcode = resultset.getString(1);
+                String name = resultset.getString(2);
+                String edition = resultset.getString(3);
+                double price = resultset.getDouble(4);
+                String genre = resultset.getString(6);
+
+                Books book = new Books(barcode, name, edition, price, genre);
+
+                array.add(book);
+            }
+            connection.close();
+        }
+        catch(Exception e) {System.out.println(e);}
+    }
 
 
 

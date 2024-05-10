@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -174,32 +173,7 @@ public class menu2 extends JFrame {
         txtGenre.setBounds(124, 142, 180, 21);
         txtGenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
         panelInfo.add(txtGenre);
-        
-        /*rdbtnhorror = new JRadioButton("Horror");
-        rdbtnhorror.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        rdbtnhorror.setBounds(124, 141, 103, 21);
-        panelInfo.add(rdbtnhorror);
-        
-        rdbtnromance = new JRadioButton("Romance");
-        rdbtnromance.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        rdbtnromance.setBounds(125, 164, 103, 21);
-        panelInfo.add(rdbtnromance);
-        
-        rdbtnmystery = new JRadioButton("Mystery");
-        rdbtnmystery.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        rdbtnmystery.setBounds(124, 187, 103, 21);
-        panelInfo.add(rdbtnmystery);
-        
-        rdbtnpoetry = new JRadioButton("Poetry");
-        rdbtnpoetry.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        rdbtnpoetry.setBounds(124, 210, 103, 21);
-        panelInfo.add(rdbtnpoetry);
-        
-        ButtonGroup genreGroup = new ButtonGroup();
-        genreGroup.add(rdbtnhorror);
-        genreGroup.add(rdbtnromance);
-        genreGroup.add(rdbtnmystery);
-        genreGroup.add(rdbtnpoetry);*/
+
 
 
         
@@ -284,12 +258,7 @@ public class menu2 extends JFrame {
                     JOptionPane.showMessageDialog(menuFrame, "Book found:\nBarcode: " + foundBook.getBarcode() +"\nName: " + foundBook.getName() +
                     		"\nEdition: " + foundBook.getEdition() +"\nPrice: " + foundBook.getPrice());
                     */
-                    
-                    /*txtbarcode.setText(foundBook.getBarcode());
-                    txtbname.setText(foundBook.getName());
-                    txtedition.setText(foundBook.getEdition());
-                    txtprice.setText(String.valueOf(foundBook.getPrice()));
-                    txtgenre.setText(foundBook.getGenre());*/
+
 
                     MySQL.searchBook(barcode);
 
@@ -363,11 +332,13 @@ public class menu2 extends JFrame {
                     removeBookFromTable(foundBook);
                     
                     JOptionPane.showMessageDialog(menuFrame, "Book deleted successfully.");
-                    clear();
-                    {
-                    JOptionPane.showMessageDialog(menuFrame, "Book not found.");
                     MySQL.deleteBook(barcode);
-                    }
+                    clear();
+
+
+                }
+                else {
+                    JOptionPane.showMessageDialog(menuFrame, "Book not found.");
                     MySQL.deleteBook(barcode);
                 }
             }
@@ -407,7 +378,9 @@ public class menu2 extends JFrame {
         model = new DefaultTableModel();
         DefaultTableModel model= (DefaultTableModel)table_1.getModel();
         MySQL.loadBooks(model);
-        
+
+        MySQL.loadBooksToArray(books);
+
         //IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
         //STOCK CARD--------------------------------------------------------------------------------------------------------------
         
@@ -477,6 +450,8 @@ public class menu2 extends JFrame {
                 
                 quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price, balance));
                 updateQuantityTotals();
+
+                MySQL.updateQuantity(barcode,quantity);
                 
                 DefaultTableModel model = (DefaultTableModel) table_2.getModel();
                 model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? price : "", state == -1 ? quantity : "", state == -1 ? price : "", balance, balance*price});

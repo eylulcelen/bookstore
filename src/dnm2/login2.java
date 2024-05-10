@@ -1,7 +1,5 @@
 package dnm2;
 
-
-
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
