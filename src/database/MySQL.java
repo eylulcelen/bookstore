@@ -7,7 +7,8 @@ import dnm2.menu2;
 public class MySQL {
 
 
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+    }
 
     public static void loadBooks(DefaultTableModel model) {
 
@@ -43,11 +44,11 @@ public class MySQL {
 
         String update = "INSERT INTO books VALUES (?, ?, ?, ?, ?, ?);";
 
-        String barcode = menu2.getTxtbarcode().getText();
-        String name = menu2.getTxtbname().getText();
-        String edition = menu2.getTxtedition().getText();
-        String price = menu2.getTxtprice().getText();
-        String genre = menu2.getTxtgenre().getText();
+        String barcode = menu2.getTxtBarcode().getText();
+        String name = menu2.getTxtBName().getText();
+        String edition = menu2.getTxtEdition().getText();
+        String price = menu2.getTxtPrice().getText();
+        String genre = menu2.getTxtGenre().getText();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -110,11 +111,11 @@ public class MySQL {
             }
             resultSet.first();
 
-            menu2.getTxtbarcode().setText(resultSet.getString(1));
-            menu2.getTxtbname().setText(resultSet.getString(2));
-            menu2.getTxtedition().setText(resultSet.getString(3));
-            menu2.getTxtprice().setText(resultSet.getString(4));
-            menu2.getTxtgenre().setText(resultSet.getString(6));
+            menu2.getTxtBarcode().setText(resultSet.getString(1));
+            menu2.getTxtBName().setText(resultSet.getString(2));
+            menu2.getTxtEdition().setText(resultSet.getString(3));
+            menu2.getTxtPrice().setText(resultSet.getString(4));
+            menu2.getTxtGenre().setText(resultSet.getString(6));
 
             connection.close();
 
@@ -129,10 +130,10 @@ public class MySQL {
         String username = "root";
         String password = "frkn3756";
 
-        String updatedName = menu2.getTxtbname().getText();
-        String updatedEdition = menu2.getTxtedition().getText();
-        String updatedPrice = menu2.getTxtprice().getText();
-        String updatedGenre = menu2.getTxtgenre().getText();
+        String updatedName = menu2.getTxtBName().getText();
+        String updatedEdition = menu2.getTxtEdition().getText();
+        String updatedPrice = menu2.getTxtPrice().getText();
+        String updatedGenre = menu2.getTxtGenre().getText();
 
         try {
             String update = "UPDATE books SET Book_name = ?, Edition = ?, Price = ?, Genre = ? WHERE barcode = ?";

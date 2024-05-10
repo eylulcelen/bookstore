@@ -30,44 +30,44 @@ import javax.swing.JRadioButton;
 
 public class menu2 extends JFrame {
 	
-	private static ArrayList<Books> books = new ArrayList<>();
-	private static ArrayList<String> usedBarcodes = new ArrayList<>();
-	private Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
+	private static final ArrayList<Books> books = new ArrayList<>();
+	private static final ArrayList<String> usedBarcodes = new ArrayList<>();
+	private final Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
 
-	private static JTextField txtbname;
-	private static JTextField txtedition;
-	private static JTextField txtprice;
-    private static JTextField txtgenre;
-	private JTextField txtsbarcode;
+	private static JTextField txtBName;
+	private static JTextField txtEdition;
+	private static JTextField txtPrice;
+    private static JTextField txtGenre;
+	private final JTextField txtsbarcode;
 
 	private JTextArea textArea;
 	private DefaultTableModel model;
 	private JTable table;
 	private static JTextField txtbarcode;
 
-    private JTable table_1;
-	private JTextField txtBarcode;
-	private JTextField txtQuantity;
-	private JTable table_2;
+    private final JTable table_1;
+	private final JTextField txtBarcode;
+	private final JTextField txtQuantity;
+	private final JTable table_2;
 
-    public static JTextField getTxtbname() {
-        return txtbname;
+    public static JTextField getTxtBName() {
+        return txtBName;
     }
 
-    public static JTextField getTxtedition() {
-        return txtedition;
+    public static JTextField getTxtEdition() {
+        return txtEdition;
     }
 
-    public static JTextField getTxtprice() {
-        return txtprice;
+    public static JTextField getTxtPrice() {
+        return txtPrice;
     }
 
-    public static JTextField getTxtbarcode() {
+    public static JTextField getTxtBarcode() {
         return txtbarcode;
     }
 
-    public static JTextField getTxtgenre() {
-        return txtgenre;
+    public static JTextField getTxtGenre() {
+        return txtGenre;
     }
 
 
@@ -92,102 +92,102 @@ public class menu2 extends JFrame {
 
 
 		
-		JFrame menuframe = new JFrame();
-		menuframe.setTitle("Book Management System");
-        menuframe.setBounds(100, 100, 760, 500);
-        menuframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        menuframe.getContentPane().setLayout(null);
+		JFrame menuFrame = new JFrame();
+		menuFrame.setTitle("Book Management System");
+        menuFrame.setBounds(100, 100, 1000, 700);
+        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuFrame.getContentPane().setLayout(null);
         
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-        tabbedPane.setBounds(10, 10, 731, 458);
-        menuframe.getContentPane().add(tabbedPane);
+        tabbedPane.setBounds(10, 10, 980, 655);
+        menuFrame.getContentPane().add(tabbedPane);
         
-        //BOOKCARD---------------------------------------------------------------------------------------------------------------
+        //BOOK CARD---------------------------------------------------------------------------------------------------------------
         
-        JPanel panelbc = new JPanel();
-        tabbedPane.addTab("Book Card", null, panelbc, null);
-        panelbc.setLayout(null);
+        JPanel panelBC = new JPanel();
+        tabbedPane.addTab("Book Card", null, panelBC, null);
+        panelBC.setLayout(null);
         
-        JLabel lblbcard = new JLabel("Book Card:");
-        lblbcard.setFont(new Font("Tahoma", Font.BOLD, 20));
-        lblbcard.setBounds(10, 6, 149, 40);
-        panelbc.add(lblbcard);
+        JLabel labelCard = new JLabel("Book Card:");
+        labelCard.setFont(new Font("Tahoma", Font.BOLD, 20));
+        labelCard.setBounds(10, 6, 149, 40);
+        panelBC.add(labelCard);
         
-        JPanel panelinfo = new JPanel();
-        panelinfo.setBorder(new TitledBorder(null, "Registration", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        panelinfo.setBounds(20, 56, 266, 243);
-        panelbc.add(panelinfo);
-        panelinfo.setLayout(null);
+        JPanel panelInfo = new JPanel();
+        panelInfo.setBorder(new TitledBorder(null, "Registration", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panelInfo.setBounds(20, 56, 320, 200);
+        panelBC.add(panelInfo);
+        panelInfo.setLayout(null);
         
-        JLabel lblprice = new JLabel("Price:");
-        lblprice.setBounds(10, 113, 104, 19);
-        panelinfo.add(lblprice);
-        lblprice.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel labelPrice = new JLabel("Price:");
+        labelPrice.setBounds(10, 113, 104, 19);
+        panelInfo.add(labelPrice);
+        labelPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
-        txtprice = new JTextField(10);
-        txtprice.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtprice.setBounds(124, 112, 104, 21);
-        panelinfo.add(txtprice);
+        txtPrice = new JTextField(10);
+        txtPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtPrice.setBounds(124, 112, 180, 21);
+        panelInfo.add(txtPrice);
 
-        JLabel lblbarcode = new JLabel("Barcode:");
-        lblbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblbarcode.setBounds(10, 22, 104, 19);
-        panelinfo.add(lblbarcode);
+        JLabel labelBarcode = new JLabel("Barcode:");
+        labelBarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        labelBarcode.setBounds(10, 22, 104, 19);
+        panelInfo.add(labelBarcode);
         
         txtbarcode = new JTextField(10);
         txtbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtbarcode.setBounds(124, 21, 104, 21);
-        panelinfo.add(txtbarcode);
+        txtbarcode.setBounds(124, 21, 180, 21);
+        panelInfo.add(txtbarcode);
         
-        JLabel lblbname = new JLabel("Book Name:");
-        lblbname.setBounds(10, 52, 82, 19);
-        panelinfo.add(lblbname);
-        lblbname.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel labelBName = new JLabel("Book Name:");
+        labelBName.setBounds(10, 52, 82, 19);
+        panelInfo.add(labelBName);
+        labelBName.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
-        txtbname = new JTextField(10);
-        txtbname.setBounds(124, 51, 104, 21);
-        panelinfo.add(txtbname);
-        txtbname.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtBName = new JTextField(10);
+        txtBName.setBounds(124, 51, 180, 21);
+        panelInfo.add(txtBName);
+        txtBName.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
-        JLabel lbledition = new JLabel("Edition:");
-        lbledition.setBounds(10, 84, 104, 19);
-        panelinfo.add(lbledition);
-        lbledition.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        JLabel labelEdition = new JLabel("Edition:");
+        labelEdition.setBounds(10, 84, 104, 19);
+        panelInfo.add(labelEdition);
+        labelEdition.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
-        txtedition = new JTextField(10);
-        txtedition.setBounds(124, 81, 104, 21);
-        panelinfo.add(txtedition);
-        txtedition.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtEdition = new JTextField(10);
+        txtEdition.setBounds(124, 81, 180, 21);
+        panelInfo.add(txtEdition);
+        txtEdition.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
         JLabel lblgenre = new JLabel("Genre:");
         lblgenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
         lblgenre.setBounds(10, 142, 104, 19);
-        panelinfo.add(lblgenre);
+        panelInfo.add(lblgenre);
 
-        txtgenre = new JTextField(10);
-        txtgenre.setBounds(124, 142, 104, 21);
-        txtgenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panelinfo.add(txtgenre);
+        txtGenre = new JTextField(10);
+        txtGenre.setBounds(124, 142, 180, 21);
+        txtGenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        panelInfo.add(txtGenre);
         
         /*rdbtnhorror = new JRadioButton("Horror");
         rdbtnhorror.setFont(new Font("Tahoma", Font.PLAIN, 15));
         rdbtnhorror.setBounds(124, 141, 103, 21);
-        panelinfo.add(rdbtnhorror);
+        panelInfo.add(rdbtnhorror);
         
         rdbtnromance = new JRadioButton("Romance");
         rdbtnromance.setFont(new Font("Tahoma", Font.PLAIN, 15));
         rdbtnromance.setBounds(125, 164, 103, 21);
-        panelinfo.add(rdbtnromance);
+        panelInfo.add(rdbtnromance);
         
         rdbtnmystery = new JRadioButton("Mystery");
         rdbtnmystery.setFont(new Font("Tahoma", Font.PLAIN, 15));
         rdbtnmystery.setBounds(124, 187, 103, 21);
-        panelinfo.add(rdbtnmystery);
+        panelInfo.add(rdbtnmystery);
         
         rdbtnpoetry = new JRadioButton("Poetry");
         rdbtnpoetry.setFont(new Font("Tahoma", Font.PLAIN, 15));
         rdbtnpoetry.setBounds(124, 210, 103, 21);
-        panelinfo.add(rdbtnpoetry);
+        panelInfo.add(rdbtnpoetry);
         
         ButtonGroup genreGroup = new ButtonGroup();
         genreGroup.add(rdbtnhorror);
@@ -197,15 +197,15 @@ public class menu2 extends JFrame {
 
 
         
-        JButton btnsave = new JButton("Save");
-        btnsave.addActionListener(new ActionListener() {
+        JButton btnSave = new JButton("Save");
+        btnSave.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                 	
                 String barcode = txtbarcode.getText();
-                String bookName = txtbname.getText();
-                String edition = txtedition.getText();
-                double price = Double.parseDouble(txtprice.getText());
-                String genre = txtgenre.getText();
+                String bookName = txtBName.getText();
+                String edition = txtEdition.getText();
+                double price = Double.parseDouble(txtPrice.getText());
+                String genre = txtGenre.getText();
 
 
                 if (!isBarcodeUnique(barcode)) {
@@ -226,43 +226,43 @@ public class menu2 extends JFrame {
         });
         
         
-        btnsave.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnsave.setBounds(30, 309, 85, 37);
-        panelbc.add(btnsave);
-        
-        
+        btnSave.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnSave.setBounds(30, 270, 85, 37);
+        panelBC.add(btnSave);
+
+
         textArea = new JTextArea();
         textArea.setEditable(false);
         
         
-        JButton btnclear = new JButton("Clear");
-        btnclear.addActionListener(new ActionListener() {
+        JButton btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                clear();
             }
         });
         
         
-        btnclear.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnclear.setBounds(185, 309, 85, 39);
-        panelbc.add(btnclear);
+        btnClear.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnClear.setBounds(245, 270, 85, 39);
+        panelBC.add(btnClear);
         
-        JPanel searchpanel = new JPanel();
-        searchpanel.setBorder(new TitledBorder(null, "Search", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-        searchpanel.setBounds(384, 271, 266, 127);
-        panelbc.add(searchpanel);
-        searchpanel.setLayout(null);
+        JPanel searchPanel = new JPanel();
+        searchPanel.setBorder(new TitledBorder(null, "Search", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        searchPanel.setBounds(45, 350, 266, 127);
+        panelBC.add(searchPanel);
+        searchPanel.setLayout(null);
         
-        JLabel lblsbarcode = new JLabel("Book's barcode:");
-        lblsbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        lblsbarcode.setBounds(10, 35, 130, 19);
-        searchpanel.add(lblsbarcode);
+        JLabel labelsBarcode = new JLabel("Book's barcode:");
+        labelsBarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        labelsBarcode.setBounds(10, 35, 130, 19);
+        searchPanel.add(labelsBarcode);
         
         txtsbarcode = new JTextField();
         txtsbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtsbarcode.setColumns(10);
         txtsbarcode.setBounds(131, 34, 125, 21);
-        searchpanel.add(txtsbarcode);
+        searchPanel.add(txtsbarcode);
         
         
         JButton btnSearch = new JButton("Search");
@@ -275,7 +275,7 @@ public class menu2 extends JFrame {
                 if (foundBook != null) {
                 	
                 	/*
-                    JOptionPane.showMessageDialog(menuframe, "Book found:\nBarcode: " + foundBook.getBarcode() +"\nName: " + foundBook.getName() +
+                    JOptionPane.showMessageDialog(menuFrame, "Book found:\nBarcode: " + foundBook.getBarcode() +"\nName: " + foundBook.getName() +
                     		"\nEdition: " + foundBook.getEdition() +"\nPrice: " + foundBook.getPrice());
                     */
                     
@@ -290,7 +290,7 @@ public class menu2 extends JFrame {
                     
                 } 
                 else{
-                     JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                     JOptionPane.showMessageDialog(menuFrame, "Book not found.");
                      MySQL.searchBook(barcode);
                 }
             	
@@ -300,11 +300,11 @@ public class menu2 extends JFrame {
 
         btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 15));
         btnSearch.setBounds(81, 77, 85, 40);
-        searchpanel.add(btnSearch);
+        searchPanel.add(btnSearch);
         
         
-        JButton btnupdate = new JButton("Update");
-        btnupdate.addActionListener(new ActionListener() {
+        JButton btnUpdate = new JButton("Update");
+        btnUpdate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
                 String barcode = txtbarcode.getText();
@@ -312,13 +312,12 @@ public class menu2 extends JFrame {
                 
                 if (foundBook != null) {
                 	
-                    String updatedName = txtbname.getText();
-                    String updatedEdition = txtedition.getText();
-                    double updatedPrice = Double.parseDouble(txtprice.getText());
-                    String updatedGenre = txtgenre.getText();
+                    String updatedName = txtBName.getText();
+                    String updatedEdition = txtEdition.getText();
+                    double updatedPrice = Double.parseDouble(txtPrice.getText());
+                    String updatedGenre = txtGenre.getText();
 
                     
-                    //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
                     foundBook.setName(updatedName);
                     foundBook.setEdition(updatedEdition);
@@ -330,23 +329,23 @@ public class menu2 extends JFrame {
 
                     MySQL.updateBook(barcode);
                     
-                    JOptionPane.showMessageDialog(menuframe, "Book updated successfully.");
+                    JOptionPane.showMessageDialog(menuFrame, "Book updated successfully.");
                 } 
                 else {
-                    JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    JOptionPane.showMessageDialog(menuFrame, "Book not found.");
                     MySQL.updateBook(barcode);
                 }	
             }
         });
         
         
-        btnupdate.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnupdate.setBounds(355, 206, 85, 40);
-        panelbc.add(btnupdate);
+        btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnUpdate.setBounds(30, 520, 85, 40);
+        panelBC.add(btnUpdate);
         
         
-        JButton btndelete = new JButton("Delete");
-        btndelete.addActionListener(new ActionListener() {
+        JButton btnDelete = new JButton("Delete");
+        btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
                 String barcode = txtsbarcode.getText();
@@ -357,10 +356,10 @@ public class menu2 extends JFrame {
                     books.remove(foundBook);
                     removeBookFromTable(foundBook);
                     
-                    JOptionPane.showMessageDialog(menuframe, "Book deleted successfully.");
+                    JOptionPane.showMessageDialog(menuFrame, "Book deleted successfully.");
                     clear();
                     {
-                    JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    JOptionPane.showMessageDialog(menuFrame, "Book not found.");
                     MySQL.deleteBook(barcode);
                     }
                     MySQL.deleteBook(barcode);
@@ -369,28 +368,32 @@ public class menu2 extends JFrame {
         });
         
         
-        btndelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btndelete.setBounds(605, 206, 85, 40);
-        panelbc.add(btndelete);
+        btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        btnDelete.setBounds(245, 520, 85, 40);
+        panelBC.add(btnDelete);
         
         
         
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(345, 17, 360, 181);
-        panelbc.add(scrollPane);
+        scrollPane.setBounds(345, 17, 610, 575);
+        panelBC.add(scrollPane);
         
         table_1 = new JTable();
         table_1.setModel(new DefaultTableModel(
         	new Object[][] {},new String[] {"Barcode", "Book Name", "Edition", "Price", "Genre"}
 
-        ) 
+        )
         {
-        	Class[] columnTypes = new Class[] {String.class, String.class, String.class, Double.class, String.class};
+        	final Class[] columnTypes = new Class[] {String.class, String.class, String.class, Double.class, String.class};
         	public Class getColumnClass(int columnIndex) {
         		return columnTypes[columnIndex];
         	}
         });
 
+        table_1.getColumnModel().getColumn(0).setMaxWidth(50);
+        table_1.getColumnModel().getColumn(1).setMinWidth(250);
+        table_1.getColumnModel().getColumn(2).setMaxWidth(50);
+        table_1.getColumnModel().getColumn(3).setMaxWidth(50);
 
 
         scrollPane.setViewportView(table_1);
@@ -400,21 +403,21 @@ public class menu2 extends JFrame {
         MySQL.loadBooks(model);
         
         //IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-        //STOCKCARD--------------------------------------------------------------------------------------------------------------
+        //STOCK CARD--------------------------------------------------------------------------------------------------------------
         
-        JPanel panelsc = new JPanel();
-        tabbedPane.addTab("Stock Card", null, panelsc, null);
-        panelsc.setLayout(null);
+        JPanel panelSC = new JPanel();
+        tabbedPane.addTab("Stock Card", null, panelSC, null);
+        panelSC.setLayout(null);
         
         JLabel lblStockCard = new JLabel("Stock Card:");
         lblStockCard.setBounds(10, 6, 149, 40);
         lblStockCard.setFont(new Font("Tahoma", Font.BOLD, 20));
-        panelsc.add(lblStockCard);
+        panelSC.add(lblStockCard);
         
         JPanel panel = new JPanel();
         panel.setBounds(10, 56, 706, 81);
         panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Enter Stock", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-        panelsc.add(panel);
+        panelSC.add(panel);
         panel.setLayout(null);
         
         JLabel lblBarcode = new JLabel("Barcode:");
@@ -427,15 +430,15 @@ public class menu2 extends JFrame {
         lblQuantity.setBounds(236, 32, 95, 19);
         panel.add(lblQuantity);
         
-        JRadioButton rdbtnın = new JRadioButton("In");
-        rdbtnın.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        rdbtnın.setBounds(449, 35, 53, 19);
-        panel.add(rdbtnın);
+        JRadioButton rdBtnIn = new JRadioButton("In");
+        rdBtnIn.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        rdBtnIn.setBounds(449, 35, 53, 19);
+        panel.add(rdBtnIn);
         
-        JRadioButton rdbtnout = new JRadioButton("Out");
-        rdbtnout.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        rdbtnout.setBounds(504, 34, 53, 21);
-        panel.add(rdbtnout);
+        JRadioButton rdBtnOut = new JRadioButton("Out");
+        rdBtnOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        rdBtnOut.setBounds(504, 34, 53, 21);
+        panel.add(rdBtnOut);
         
         txtBarcode = new JTextField();
         txtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -450,8 +453,8 @@ public class menu2 extends JFrame {
         
         
         ButtonGroup stateGroup = new ButtonGroup();
-        stateGroup.add(rdbtnın);
-        stateGroup.add(rdbtnout);
+        stateGroup.add(rdBtnIn);
+        stateGroup.add(rdBtnOut);
 
         
         JButton btnEnter = new JButton("Enter");
@@ -461,7 +464,7 @@ public class menu2 extends JFrame {
                 String barcode = txtBarcode.getText();
                 int quantity = Integer.parseInt(txtQuantity.getText());
                 double price = searchBookByBarcode(barcode).getPrice();
-                int state = rdbtnın.isSelected() ? 1 : -1;
+                int state = rdBtnIn.isSelected() ? 1 : -1;
                 int balance = quantity * state;
                 
                 Books foundBook = searchBookByBarcode(barcode);
@@ -475,9 +478,9 @@ public class menu2 extends JFrame {
                 if (foundBook != null) {
                     foundBook.setBalance(foundBook.getQuantity() + (quantity * state));
                     updateBookInTable2(foundBook);
-                    JOptionPane.showMessageDialog(menuframe, "Book Stock updated successfully.");
+                    JOptionPane.showMessageDialog(menuFrame, "Book Stock updated successfully.");
                 } else {
-                    JOptionPane.showMessageDialog(menuframe, "Book not found.");
+                    JOptionPane.showMessageDialog(menuFrame, "Book not found.");
                 }
         	}
         	
@@ -490,7 +493,7 @@ public class menu2 extends JFrame {
         
         JScrollPane scrollPane_2 = new JScrollPane();
         scrollPane_2.setBounds(10, 159, 706, 251);
-        panelsc.add(scrollPane_2);
+        panelSC.add(scrollPane_2);
         
         table_2 = new JTable();
         scrollPane_2.setViewportView(table_2);
@@ -501,11 +504,11 @@ public class menu2 extends JFrame {
         		"Barcode", "In Quantity", "In Value", "Out Quantity", "Out Value", "Balance Quantity", "Balance Value"
         	}
         ) {
-        	boolean[] columnEditables = new boolean[] {
+        	final boolean[] columnEditable = new boolean[] {
         		false, true, true, true, true, true, true
         	};
         	public boolean isCellEditable(int row, int column) {
-        		return columnEditables[column];
+        		return columnEditable[column];
         	}
         	
         	
@@ -514,7 +517,7 @@ public class menu2 extends JFrame {
         
         
     
-        menuframe.setVisible(true);
+        menuFrame.setVisible(true);
 
 	}
 
@@ -542,10 +545,10 @@ public class menu2 extends JFrame {
     private void clear() {
     	
         txtbarcode.setText("");
-        txtbname.setText("");
-        txtedition.setText("");
-        txtprice.setText("");
-        txtgenre.setText("");
+        txtBName.setText("");
+        txtEdition.setText("");
+        txtPrice.setText("");
+        txtGenre.setText("");
         
     }
     
