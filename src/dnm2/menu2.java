@@ -38,7 +38,7 @@ public class menu2 extends JFrame {
 	private static JTextField txtEdition;
 	private static JTextField txtPrice;
     private static JTextField txtGenre;
-	private final JTextField txtsbarcode;
+	private final JTextField txtsBarcode;
 
 	private JTextArea textArea;
 	private DefaultTableModel model;
@@ -258,18 +258,18 @@ public class menu2 extends JFrame {
         labelsBarcode.setBounds(10, 35, 130, 19);
         searchPanel.add(labelsBarcode);
         
-        txtsbarcode = new JTextField();
-        txtsbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        txtsbarcode.setColumns(10);
-        txtsbarcode.setBounds(131, 34, 125, 21);
-        searchPanel.add(txtsbarcode);
+        txtsBarcode = new JTextField();
+        txtsBarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtsBarcode.setColumns(10);
+        txtsBarcode.setBounds(131, 34, 125, 21);
+        searchPanel.add(txtsBarcode);
         
         
         JButton btnSearch = new JButton("Search");
         btnSearch.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
-                String barcode = txtsbarcode.getText();
+                String barcode = txtsBarcode.getText();
                 Books foundBook = searchBookByBarcode(barcode);
                 
                 if (foundBook != null) {
@@ -348,7 +348,7 @@ public class menu2 extends JFrame {
         btnDelete.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
-                String barcode = txtsbarcode.getText();
+                String barcode = txtsBarcode.getText();
                 Books foundBook = searchBookByBarcode(barcode);
                 
                 if (foundBook != null) {
@@ -415,7 +415,7 @@ public class menu2 extends JFrame {
         panelSC.add(lblStockCard);
         
         JPanel panel = new JPanel();
-        panel.setBounds(10, 56, 706, 81);
+        panel.setBounds(10, 56, 939, 81);
         panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Enter Stock", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         panelSC.add(panel);
         panel.setLayout(null);
@@ -432,12 +432,12 @@ public class menu2 extends JFrame {
         
         JRadioButton rdBtnIn = new JRadioButton("In");
         rdBtnIn.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        rdBtnIn.setBounds(449, 35, 53, 19);
+        rdBtnIn.setBounds(450, 33, 53, 19);
         panel.add(rdBtnIn);
         
         JRadioButton rdBtnOut = new JRadioButton("Out");
         rdBtnOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        rdBtnOut.setBounds(504, 34, 53, 21);
+        rdBtnOut.setBounds(525, 33, 70, 21);
         panel.add(rdBtnOut);
         
         txtBarcode = new JTextField();
@@ -488,11 +488,11 @@ public class menu2 extends JFrame {
 		
         
         btnEnter.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        btnEnter.setBounds(589, 21, 85, 40);
+        btnEnter.setBounds(610, 21, 85, 40);
         panel.add(btnEnter);
         
         JScrollPane scrollPane_2 = new JScrollPane();
-        scrollPane_2.setBounds(10, 159, 706, 251);
+        scrollPane_2.setBounds(10, 159, 939, 435);
         panelSC.add(scrollPane_2);
         
         table_2 = new JTable();
