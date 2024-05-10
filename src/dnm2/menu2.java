@@ -46,8 +46,8 @@ public class menu2 extends JFrame {
 	private static JTextField txtbarcode;
 
     private final JTable table_1;
-	private final JTextField txtBarcode;
-	private final JTextField txtQuantity;
+	private static JTextField txtBarcode;
+	private static JTextField txtQuantity;
 	private final JTable table_2;
 
     public static JTextField getTxtBName() {
@@ -62,7 +62,7 @@ public class menu2 extends JFrame {
         return txtPrice;
     }
 
-    public static JTextField getTxtBarcode() {
+    public static JTextField getTxtbarcode() {
         return txtbarcode;
     }
 
@@ -70,7 +70,13 @@ public class menu2 extends JFrame {
         return txtGenre;
     }
 
+    public static JTextField getTxtQuantity() {
+        return txtQuantity;
+    }
 
+    public static JTextField getTxtBarcode() {
+        return txtBarcode;
+    }
 
     /**
 	 * Launch the application.

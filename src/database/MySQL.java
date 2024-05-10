@@ -7,14 +7,15 @@ import dnm2.menu2;
 public class MySQL {
 
 
-    public static void main(String[] args) {
-    }
+    public static void main(String[] args) {}
+
+    private static final String url = "jdbc:mysql://localhost:3306/java_sql";
+    private static final String username = "root";
+    private static final String password = "frkn3756";
 
     public static void loadBooks(DefaultTableModel model) {
 
-        String url = "jdbc:mysql://localhost:3306/java_sql";
-        String username = "root";
-        String password = "frkn3756";
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -38,13 +39,10 @@ public class MySQL {
 
 
     public static void addBook() {
-        String url = "jdbc:mysql://localhost:3306/java_sql";
-        String username = "root";
-        String password = "frkn3756";
 
         String update = "INSERT INTO books VALUES (?, ?, ?, ?, ?, ?);";
 
-        String barcode = menu2.getTxtBarcode().getText();
+        String barcode = menu2.getTxtbarcode().getText();
         String name = menu2.getTxtBName().getText();
         String edition = menu2.getTxtEdition().getText();
         String price = menu2.getTxtPrice().getText();
@@ -69,9 +67,6 @@ public class MySQL {
     }
 
     public static void deleteBook(String barcode) {
-        String url = "jdbc:mysql://localhost:3306/java_sql";
-        String username = "root";
-        String password = "frkn3756";
 
         String delete = "DELETE FROM books WHERE barcode = ?;";
 
@@ -92,9 +87,6 @@ public class MySQL {
 
 
     public static void searchBook(String barcode) {
-        String url = "jdbc:mysql://localhost:3306/java_sql";
-        String username = "root";
-        String password = "frkn3756";
 
         String search = "SELECT * FROM books WHERE Barcode = ?;";
 
@@ -111,7 +103,7 @@ public class MySQL {
             }
             resultSet.first();
 
-            menu2.getTxtBarcode().setText(resultSet.getString(1));
+            menu2.getTxtbarcode().setText(resultSet.getString(1));
             menu2.getTxtBName().setText(resultSet.getString(2));
             menu2.getTxtEdition().setText(resultSet.getString(3));
             menu2.getTxtPrice().setText(resultSet.getString(4));
@@ -126,9 +118,6 @@ public class MySQL {
 
 
     public static void updateBook(String barcode) {
-        String url = "jdbc:mysql://localhost:3306/java_sql";
-        String username = "root";
-        String password = "frkn3756";
 
         String updatedName = menu2.getTxtBName().getText();
         String updatedEdition = menu2.getTxtEdition().getText();
@@ -146,12 +135,34 @@ public class MySQL {
             statement.setString(4, updatedGenre);
             statement.setString(5,barcode);
             statement.executeUpdate();
+
+            connection.close();
         }
         catch(Exception e) {System.out.println(e);}
     }
 
 
+    public static void updateQuantity(String barcode, int quantity) {
 
+        //barcode = menu2.getTxtBarcode().getText();
+        //quantity = Integer.parseInt(menu2.getTxtQuantity().getText());
+        String update = "UPDATE books SET Quantity = Quantity + ? Where Barcode = ?;";
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = connection.prepareStatement(update);
+            statement.setInt(1,quantity);
+            statement.setString(2,barcode);
+            statement.executeUpdate();
+            connection.close();
+
+
+        }catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 
 
 
@@ -177,9 +188,7 @@ public class MySQL {
 
 
     public static void printAllBooks() {
-        String url = "jdbc:mysql://localhost:3306/java_sql";
-        String username = "root";
-        String password = "frkn3756";
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -196,3 +205,4 @@ public class MySQL {
     }
 
 }
+
