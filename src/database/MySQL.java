@@ -16,28 +16,7 @@ public class MySQL {
     private static final String username = "root";
     private static final String password = "frkn3756";
 
-    public static void loadBooks(DefaultTableModel model) {
 
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-
-            Connection connection = DriverManager.getConnection(url, username, password);
-            Statement statement = connection.createStatement();
-            ResultSet resultset = statement.executeQuery("SELECT * FROM books");
-
-            while(resultset.next()) {
-
-                model.addRow(new Object[] {
-                        resultset.getInt(1),
-                        resultset.getString(2),
-                        resultset.getInt(3),
-                        Double.parseDouble(resultset.getString(4)),
-                        resultset.getString(6)});
-            }
-            connection.close();
-        }
-        catch(Exception e) {System.out.println(e);}}
 
 
 
@@ -168,7 +147,10 @@ public class MySQL {
     }
 
 
-    public static void loadBooksToArray(ArrayList<Books> array) {
+
+    public static void loadBooks(DefaultTableModel model, ArrayList<Books> array) {
+
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
@@ -176,8 +158,8 @@ public class MySQL {
             Statement statement = connection.createStatement();
             ResultSet resultset = statement.executeQuery("SELECT * FROM books");
 
-
             while(resultset.next()) {
+
                 String barcode = resultset.getString(1);
                 String name = resultset.getString(2);
                 String edition = resultset.getString(3);
@@ -185,13 +167,13 @@ public class MySQL {
                 String genre = resultset.getString(6);
 
                 Books book = new Books(barcode, name, edition, price, genre);
-
                 array.add(book);
+
+                model.addRow(new Object[] {String.valueOf(barcode), name, edition, price, genre});
             }
             connection.close();
         }
-        catch(Exception e) {System.out.println(e);}
-    }
+        catch(Exception e) {System.out.println(e);}}
 
 
 

@@ -1,6 +1,7 @@
 package dnm2;
 
 import database.MySQL;
+import dnm2.JNumberTextField;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -34,19 +35,19 @@ public class menu2 extends JFrame {
 	private final Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
 
 	private static JTextField txtBName;
-	private static JTextField txtEdition;
-	private static JTextField txtPrice;
+	private static JNumberTextField txtEdition;
+	private static JNumberTextField txtPrice;
     private static JTextField txtGenre;
-	private final JTextField txtsBarcode;
+	private final JNumberTextField txtsBarcode;
 
 	private JTextArea textArea;
 	private DefaultTableModel model;
 	private JTable table;
-	private static JTextField txtbarcode;
+	private static JNumberTextField txtbarcode;
 
     private final JTable table_1;
-	private static JTextField txtBarcode;
-	private static JTextField txtQuantity;
+	private static JNumberTextField txtBarcode;
+	private static JNumberTextField txtQuantity;
 	private final JTable table_2;
 
     public static JTextField getTxtBName() {
@@ -129,20 +130,22 @@ public class menu2 extends JFrame {
         panelInfo.add(labelPrice);
         labelPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
-        txtPrice = new JTextField(10);
+        txtPrice = new JNumberTextField();
         txtPrice.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtPrice.setBounds(124, 112, 180, 21);
         panelInfo.add(txtPrice);
+        txtPrice.setColumns(10);
 
         JLabel labelBarcode = new JLabel("Barcode:");
         labelBarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         labelBarcode.setBounds(10, 22, 104, 19);
         panelInfo.add(labelBarcode);
         
-        txtbarcode = new JTextField(10);
+        txtbarcode = new JNumberTextField();
         txtbarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtbarcode.setBounds(124, 21, 180, 21);
         panelInfo.add(txtbarcode);
+        txtbarcode.setColumns(10);
         
         JLabel labelBName = new JLabel("Book Name:");
         labelBName.setBounds(10, 52, 82, 19);
@@ -159,10 +162,11 @@ public class menu2 extends JFrame {
         panelInfo.add(labelEdition);
         labelEdition.setFont(new Font("Tahoma", Font.PLAIN, 15));
         
-        txtEdition = new JTextField(10);
+        txtEdition = new JNumberTextField();
         txtEdition.setBounds(124, 81, 180, 21);
         panelInfo.add(txtEdition);
         txtEdition.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        txtEdition.setColumns(10);
 
         JLabel lblgenre = new JLabel("Genre:");
         lblgenre.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -238,7 +242,7 @@ public class menu2 extends JFrame {
         labelsBarcode.setBounds(10, 35, 130, 19);
         searchPanel.add(labelsBarcode);
         
-        txtsBarcode = new JTextField();
+        txtsBarcode = new JNumberTextField();
         txtsBarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtsBarcode.setColumns(10);
         txtsBarcode.setBounds(131, 34, 125, 21);
@@ -377,9 +381,8 @@ public class menu2 extends JFrame {
 
         model = new DefaultTableModel();
         DefaultTableModel model= (DefaultTableModel)table_1.getModel();
-        MySQL.loadBooks(model);
+        MySQL.loadBooks(model, books);
 
-        MySQL.loadBooksToArray(books);
 
         //IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
         //STOCK CARD--------------------------------------------------------------------------------------------------------------
@@ -419,13 +422,13 @@ public class menu2 extends JFrame {
         rdBtnOut.setBounds(525, 33, 70, 21);
         panel.add(rdBtnOut);
         
-        txtBarcode = new JTextField();
+        txtBarcode = new JNumberTextField();
         txtBarcode.setFont(new Font("Tahoma", Font.PLAIN, 15));
         txtBarcode.setColumns(10);
         txtBarcode.setBounds(107, 31, 104, 21);
         panel.add(txtBarcode);
         
-        txtQuantity = new JTextField();
+        txtQuantity = new JNumberTextField();
         txtQuantity.setBounds(319, 33, 104, 21);
         panel.add(txtQuantity);
         txtQuantity.setColumns(10);
