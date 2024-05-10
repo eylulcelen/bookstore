@@ -1,7 +1,6 @@
 package dnm2;
 
 import database.MySQL;
-import dnm2.JNumberTextField;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -203,6 +202,7 @@ public class menu2 extends JFrame {
                 
                 model = new DefaultTableModel();
                 DefaultTableModel model= (DefaultTableModel)table_1.getModel();
+                table_1.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
                 model.addRow(new Object[]{barcode, bookName, edition, price, genre});
                 }
                 
@@ -257,16 +257,9 @@ public class menu2 extends JFrame {
                 Books foundBook = searchBookByBarcode(barcode);
                 
                 if (foundBook != null) {
-                	
-                	/*
-                    JOptionPane.showMessageDialog(menuFrame, "Book found:\nBarcode: " + foundBook.getBarcode() +"\nName: " + foundBook.getName() +
-                    		"\nEdition: " + foundBook.getEdition() +"\nPrice: " + foundBook.getPrice());
-                    */
-
 
                     MySQL.searchBook(barcode);
 
-                    
                 } 
                 else{
                      JOptionPane.showMessageDialog(menuFrame, "Book not found.");
@@ -370,6 +363,8 @@ public class menu2 extends JFrame {
         		return columnTypes[columnIndex];
         	}
         });
+        table_1.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        table_1.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
 
         table_1.getColumnModel().getColumn(0).setMaxWidth(50);
         table_1.getColumnModel().getColumn(1).setMinWidth(250);
@@ -458,7 +453,7 @@ public class menu2 extends JFrame {
                 
                 DefaultTableModel model = (DefaultTableModel) table_2.getModel();
                 model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? price : "", state == -1 ? quantity : "", state == -1 ? price : "", balance, balance*price});
-                
+                table_2.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
                 if (foundBook != null) {
                     foundBook.setBalance(foundBook.getQuantity() + (quantity * state));
                     updateBookInTable2(foundBook);
