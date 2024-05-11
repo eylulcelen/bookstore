@@ -23,9 +23,9 @@ public class Login extends JFrame {
 
     public Login() {
         
-        users.add(new Users("emre", "7"));
-        users.add(new Users("selin", "19"));
-        users.add(new Users("root","frkn3756"));
+        users.add(new Users("eylul", "123"));
+        users.add(new Users("zeynep", "123"));
+        users.add(new Users("furkan","123"));
 
         frame = new JFrame("Book Management System");
         frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 10));

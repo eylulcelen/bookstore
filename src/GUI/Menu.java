@@ -71,13 +71,7 @@ public class Menu extends JFrame {
         return txtGenre;
     }
 
-    public static JTextField getTxtQuantity() {
-        return txtQuantity;
-    }
 
-    public static JTextField getTxtBarcode() {
-        return txtBarcode;
-    }
 
     public static JRadioButton getRdBtnIn() {
         return rdBtnIn;
@@ -282,8 +276,14 @@ public class Menu extends JFrame {
                 
                 if (foundBook != null) {
 
-                    MySQL.searchBook(barcode);
+                    txtbarcode.setText(foundBook.getBarcode());
+                    txtBName.setText(foundBook.getName());
+                    txtEdition.setText(foundBook.getEdition());
+                    txtPrice.setText(String.valueOf(foundBook.getPrice()));
+                    txtGenre.setText(foundBook.getGenre());
 
+                    // for database implementation this method would be used instead
+                    MySQL.searchBook(barcode);
                 } 
                 else{
                      JOptionPane.showMessageDialog(menuFrame, "Book not found.");

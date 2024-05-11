@@ -11,9 +11,6 @@ import GUI.Menu;
 public class MySQL {
 
 
-    public static void main(String[] args) {
-        getQuantityFromDatabase("1");
-    }
 
     private static final String url = "jdbc:mysql://localhost:3306/java_sql";
     private static final String username = "root";
@@ -70,7 +67,8 @@ public class MySQL {
 
     }
 
-
+    //as the Books arraylist and the database work in parallel for convenience no need to implement this method
+    //but in a real scenario this method would be used instead
     public static void searchBook(String barcode) {
 
         String search = "SELECT * FROM books WHERE Barcode = ?;";
