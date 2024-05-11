@@ -23,6 +23,7 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer {
             ((JComponent) c).setBorder(BorderFactory.createMatteBorder(0, 1, 1, 0, Color.BLACK));
         }
 
+
         return c;
     }
 }

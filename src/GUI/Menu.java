@@ -27,7 +27,9 @@ public class Menu extends JFrame {
 	
 	private static final ArrayList<Books> books = new ArrayList<>();
 	private static final ArrayList<String> usedBarcodes = new ArrayList<>();
-	private final Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
+	private static final Queue<QuantityUpdate> quantityUpdates = new LinkedList<>();
+
+
 
 	private static JTextField txtBName;
 	private static JNumberTextField txtEdition;
@@ -88,6 +90,11 @@ public class Menu extends JFrame {
     public static JFrame getMenuFrame() {
         return menuFrame;
     }
+
+    public static Queue<QuantityUpdate> getQuantityUpdates() {
+        return quantityUpdates;
+    }
+
 
     /**
 	 * Launch the application.
@@ -459,6 +466,10 @@ public class Menu extends JFrame {
                     return;
                 }
 
+                if(!Menu.getRdBtnIn().isSelected() && !Menu.getRdBtnOut().isSelected()) {
+                    JOptionPane.showMessageDialog(menuFrame, "Please pick in or out.");
+                    return;
+                }
 
         		
                 String barcode = txtBarcode.getText();
@@ -473,15 +484,16 @@ public class Menu extends JFrame {
 
                 MySQL.updateQuantity(barcode,quantity);
 
-                if(!Menu.getRdBtnIn().isSelected() && !Menu.getRdBtnOut().isSelected()) {
-                    return;
-                }
+
 
                 quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price, balance));
                 updateQuantityTotals();
                 
                 DefaultTableModel model = (DefaultTableModel) table_2.getModel();
-                model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? price : "", state == -1 ? quantity : "", state == -1 ? price : "", balance, balance*price});
+                model.addRow(new Object[]{barcode, state == 1 ? quantity : " -----------------",
+                        state == 1 ? price : " -----------------",
+                        state == -1 ? quantity : " -----------------",
+                        state == -1 ? price : " -----------------", balance, balance*price});
                 table_2.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
                 if (foundBook != null) {
                     foundBook.setBalance(foundBook.getQuantity() + (quantity * state));
@@ -609,7 +621,7 @@ public class Menu extends JFrame {
             int state = update.getState();
             double price = update.getPrice();
             int balance = update.getBalance();
-            balance=state * quantity;
+            balance = state * quantity;
             quantityMap.put(barcode, quantityMap.getOrDefault(barcode, 0) + (balance));
             
         }
@@ -620,22 +632,22 @@ public class Menu extends JFrame {
         for (Map.Entry<String, Integer> entry : quantityMap.entrySet()) {
         	Books book = searchBookByBarcode(entry.getKey());
             double price = book != null ? book.getPrice() : 0.0;
-            model.addRow(new Object[]{entry.getKey(),"","","","" ,entry.getValue(),entry.getValue()*price});
-            
+            model.addRow(new Object[]{entry.getKey(),MySQL.getQuantityFromDatabase(book.getBarcode()),"","","" ,entry.getValue(),entry.getValue()*price});
+
         }
 
         
     }
 
 
-    public static boolean isRegistrationFull() {
+    public boolean isRegistrationFull() {
         return !Objects.equals(txtbarcode.getText(), "")
                 && !Objects.equals(txtEdition.getText(), "")
                 && !Objects.equals(txtGenre.getText(), "")
                 && !Objects.equals(txtPrice.getText(), "");
     }
 
-    public static boolean isQUpdateFull() {
+    public boolean isQUpdateFull() {
         return !Objects.equals(txtBarcode.getText(), "") && !Objects.equals(txtQuantity.getText(), "");
     }
 }

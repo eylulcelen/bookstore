@@ -11,7 +11,9 @@ import GUI.Menu;
 public class MySQL {
 
 
-    public static void main(String[] args) {}
+    public static void main(String[] args) {
+        getQuantityFromDatabase("1");
+    }
 
     private static final String url = "jdbc:mysql://localhost:3306/java_sql";
     private static final String username = "root";
@@ -186,6 +188,32 @@ public class MySQL {
             connection.close();
         }
         catch(Exception e) {System.out.println(e);}}
+
+
+    public static int getQuantityFromDatabase(String barcode) {
+        int quantity = 0;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            String query = "SELECT quantity FROM books WHERE Barcode = ?";
+
+            Connection connection = DriverManager.getConnection(url, username, password);
+            PreparedStatement statement = connection.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1,barcode);
+
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.first();
+
+            quantity = resultSet.getInt(1);
+
+            connection.close();
+
+
+        } catch (Exception e) {System.out.println(e);}
+
+        return quantity;
+
+    }
 
 
 
