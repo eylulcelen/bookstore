@@ -1,4 +1,4 @@
-package dnm2;
+package GUI;
 
 import java.util.ArrayList;
 import javax.swing.JButton;

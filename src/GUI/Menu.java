@@ -1,13 +1,9 @@
-package dnm2;
+package GUI;
 
 import database.MySQL;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -198,7 +194,12 @@ public class Menu extends JFrame {
         
         JButton btnSave = new JButton("Save");
         btnSave.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
+
+                if (!isRegistrationFull()) {
+                    JOptionPane.showMessageDialog(null, "Please fill all of the registration fields");
+                    return;
+                }
                 	
                 String barcode = txtbarcode.getText();
                 String bookName = txtBName.getText();
@@ -453,6 +454,11 @@ public class Menu extends JFrame {
         btnEnter.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
 
+                if (!isQUpdateFull()) {
+                    JOptionPane.showMessageDialog(menuFrame, "Please fill the necessary places.");
+                    return;
+                }
+
 
         		
                 String barcode = txtBarcode.getText();
@@ -620,11 +626,21 @@ public class Menu extends JFrame {
 
         
     }
-    
-    
-    
-    
+
+
+    public static boolean isRegistrationFull() {
+        return !Objects.equals(txtbarcode.getText(), "")
+                && !Objects.equals(txtEdition.getText(), "")
+                && !Objects.equals(txtGenre.getText(), "")
+                && !Objects.equals(txtPrice.getText(), "");
+    }
+
+    public static boolean isQUpdateFull() {
+        return !Objects.equals(txtBarcode.getText(), "") && !Objects.equals(txtQuantity.getText(), "");
+    }
 }
+
+
 
 
 

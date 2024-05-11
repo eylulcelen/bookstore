@@ -1,4 +1,4 @@
-package dnm2;
+package GUI;
 
 public class QuantityUpdate {
 	private String barcode;

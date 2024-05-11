@@ -5,8 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
 
-import dnm2.Books;
-import dnm2.Menu;
+import GUI.Books;
+import GUI.Menu;
 
 public class MySQL {
 

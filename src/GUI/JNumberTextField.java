@@ -1,4 +1,4 @@
-package dnm2;
+package GUI;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
