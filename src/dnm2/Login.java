@@ -13,18 +13,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
 
-public class login2 extends JFrame {
+public class Login extends JFrame {
 	
-    private static ArrayList<Users> users = new ArrayList<>();
+    private static final ArrayList<Users> users = new ArrayList<>();
 
-    private JFrame frame;
-    private JTextField usernameField;
-    private JPasswordField passwordField;
+    private final JFrame frame;
+    private final JTextField usernameField;
+    private final JPasswordField passwordField;
 
-    public login2() {
+    public Login() {
         
         users.add(new Users("emre", "7"));
         users.add(new Users("selin", "19"));
+        users.add(new Users("root","frkn3756"));
 
         frame = new JFrame("Book Management System");
         frame.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 10));
@@ -76,10 +77,10 @@ public class login2 extends JFrame {
 
                 if (login(username, password)) {
                     JOptionPane.showMessageDialog(frame, "Login successful.");
-                    // Additional actions after successful login can be added here
-                    frame.dispose(); // Close login window
+                    // Additional actions after successful Login can be added here
+                    frame.dispose(); // Close Login window
                     //create object
-                    new menu2();
+                    new Menu();
                                                             
                 }
                 else {
@@ -105,7 +106,7 @@ public class login2 extends JFrame {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new login2();
+                new Login();
                 
             }
         });

@@ -27,7 +27,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JRadioButton;
 
 
-public class menu2 extends JFrame {
+public class Menu extends JFrame {
 	
 	private static final ArrayList<Books> books = new ArrayList<>();
 	private static final ArrayList<String> usedBarcodes = new ArrayList<>();
@@ -48,6 +48,10 @@ public class menu2 extends JFrame {
 	private static JNumberTextField txtBarcode;
 	private static JNumberTextField txtQuantity;
 	private final JTable table_2;
+
+    private static JRadioButton rdBtnIn;
+    private static JRadioButton rdBtnOut;
+    private static JFrame menuFrame;
 
     public static JTextField getTxtBName() {
         return txtBName;
@@ -77,13 +81,25 @@ public class menu2 extends JFrame {
         return txtBarcode;
     }
 
+    public static JRadioButton getRdBtnIn() {
+        return rdBtnIn;
+    }
+
+    public static JRadioButton getRdBtnOut() {
+        return rdBtnOut;
+    }
+
+    public static JFrame getMenuFrame() {
+        return menuFrame;
+    }
+
     /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new menu2();
+				new Menu();
 
 			}});
 	}
@@ -93,11 +109,11 @@ public class menu2 extends JFrame {
 	 * Create the frame.
 	 */
 	
-	public menu2() {
+	public Menu() {
 
 
 		
-		JFrame menuFrame = new JFrame();
+        menuFrame = new JFrame();
 		menuFrame.setTitle("Book Management System");
         menuFrame.setBounds(100, 100, 1000, 700);
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -263,7 +279,6 @@ public class menu2 extends JFrame {
                 } 
                 else{
                      JOptionPane.showMessageDialog(menuFrame, "Book not found.");
-                     MySQL.searchBook(barcode);
                 }
             	
             }
@@ -407,12 +422,12 @@ public class menu2 extends JFrame {
         lblQuantity.setBounds(236, 32, 95, 19);
         panel.add(lblQuantity);
         
-        JRadioButton rdBtnIn = new JRadioButton("In");
+        rdBtnIn = new JRadioButton("In");
         rdBtnIn.setFont(new Font("Tahoma", Font.PLAIN, 15));
         rdBtnIn.setBounds(450, 33, 53, 19);
         panel.add(rdBtnIn);
         
-        JRadioButton rdBtnOut = new JRadioButton("Out");
+        rdBtnOut = new JRadioButton("Out");
         rdBtnOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
         rdBtnOut.setBounds(525, 33, 70, 21);
         panel.add(rdBtnOut);
@@ -437,6 +452,8 @@ public class menu2 extends JFrame {
         JButton btnEnter = new JButton("Enter");
         btnEnter.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+
+
         		
                 String barcode = txtBarcode.getText();
                 int quantity = Integer.parseInt(txtQuantity.getText());
@@ -446,10 +463,16 @@ public class menu2 extends JFrame {
                 
                 Books foundBook = searchBookByBarcode(barcode);
                 
-                quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price, balance));
-                updateQuantityTotals();
+
 
                 MySQL.updateQuantity(barcode,quantity);
+
+                if(!Menu.getRdBtnIn().isSelected() && !Menu.getRdBtnOut().isSelected()) {
+                    return;
+                }
+
+                quantityUpdates.offer(new QuantityUpdate(barcode, quantity, state, price, balance));
+                updateQuantityTotals();
                 
                 DefaultTableModel model = (DefaultTableModel) table_2.getModel();
                 model.addRow(new Object[]{barcode, state == 1 ? quantity : "", state == 1 ? price : "", state == -1 ? quantity : "", state == -1 ? price : "", balance, balance*price});

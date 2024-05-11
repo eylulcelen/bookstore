@@ -1,11 +1,12 @@
 package database;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.ArrayList;
 
 import dnm2.Books;
-import dnm2.menu2;
+import dnm2.Menu;
 
 public class MySQL {
 
@@ -24,11 +25,11 @@ public class MySQL {
 
         String update = "INSERT INTO books VALUES (?, ?, ?, ?, ?, ?);";
 
-        String barcode = menu2.getTxtbarcode().getText();
-        String name = menu2.getTxtBName().getText();
-        String edition = menu2.getTxtEdition().getText();
-        String price = menu2.getTxtPrice().getText();
-        String genre = menu2.getTxtGenre().getText();
+        String barcode = Menu.getTxtbarcode().getText();
+        String name = Menu.getTxtBName().getText();
+        String edition = Menu.getTxtEdition().getText();
+        String price = Menu.getTxtPrice().getText();
+        String genre = Menu.getTxtGenre().getText();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -85,11 +86,11 @@ public class MySQL {
             }
             resultSet.first();
 
-            menu2.getTxtbarcode().setText(resultSet.getString(1));
-            menu2.getTxtBName().setText(resultSet.getString(2));
-            menu2.getTxtEdition().setText(resultSet.getString(3));
-            menu2.getTxtPrice().setText(resultSet.getString(4));
-            menu2.getTxtGenre().setText(resultSet.getString(6));
+            Menu.getTxtbarcode().setText(resultSet.getString(1));
+            Menu.getTxtBName().setText(resultSet.getString(2));
+            Menu.getTxtEdition().setText(resultSet.getString(3));
+            Menu.getTxtPrice().setText(resultSet.getString(4));
+            Menu.getTxtGenre().setText(resultSet.getString(6));
 
             connection.close();
 
@@ -101,10 +102,10 @@ public class MySQL {
 
     public static void updateBook(String barcode) {
 
-        String updatedName = menu2.getTxtBName().getText();
-        String updatedEdition = menu2.getTxtEdition().getText();
-        String updatedPrice = menu2.getTxtPrice().getText();
-        String updatedGenre = menu2.getTxtGenre().getText();
+        String updatedName = Menu.getTxtBName().getText();
+        String updatedEdition = Menu.getTxtEdition().getText();
+        String updatedPrice = Menu.getTxtPrice().getText();
+        String updatedGenre = Menu.getTxtGenre().getText();
 
         try {
             String update = "UPDATE books SET Book_name = ?, Edition = ?, Price = ?, Genre = ? WHERE barcode = ?";
@@ -126,9 +127,18 @@ public class MySQL {
 
     public static void updateQuantity(String barcode, int quantity) {
 
-        //barcode = menu2.getTxtBarcode().getText();
-        //quantity = Integer.parseInt(menu2.getTxtQuantity().getText());
         String update = "UPDATE books SET Quantity = Quantity + ? Where Barcode = ?;";
+
+
+        if (Menu.getRdBtnOut().isSelected()) {
+            quantity *= -1;
+        }
+        if(!Menu.getRdBtnIn().isSelected() && !Menu.getRdBtnOut().isSelected()) {
+            JOptionPane.showMessageDialog(Menu.getMenuFrame(), "Please choose in or out");
+            return;
+        }
+
+
 
 
         try {
@@ -168,6 +178,8 @@ public class MySQL {
 
                 Books book = new Books(barcode, name, edition, price, genre);
                 array.add(book);
+                book.setQuantity(resultset.getInt(5));
+                book.setBalance(resultset.getInt(5));
 
                 model.addRow(new Object[] {String.valueOf(barcode), name, edition, price, genre});
             }

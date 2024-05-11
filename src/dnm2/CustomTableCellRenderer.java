@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 
-
+//adds border to rows and columns
 public class CustomTableCellRenderer extends DefaultTableCellRenderer {
 
 
